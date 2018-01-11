@@ -17,7 +17,8 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 public class FirebaseDbModel {
 
     //empty constructor
-    public FirebaseDbModel(){}
+    public FirebaseDbModel() {
+    }
 
     private DatabaseReference myRef; //private reference for use in different methods
 
@@ -27,9 +28,7 @@ public class FirebaseDbModel {
         myRef = database.getReference("message");
 
         myRef.setValue("Hello, World!");
-    }
 
-    public void onDataChanged() {
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override

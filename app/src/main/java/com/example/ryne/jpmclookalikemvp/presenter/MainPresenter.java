@@ -24,10 +24,4 @@ public class MainPresenter implements MainContract.Presenter{
         firebaseDbModel.getInstance();
         mView.showInstance();
     }
-
-    @Override
-    public void onDataChanged() {
-        firebaseDbModel.onDataChanged();
-        mView.onFinish();
-    }
 }

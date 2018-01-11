@@ -9,14 +9,10 @@ public interface MainContract {
     interface  View {
 
         void showInstance();
-
-        void onFinish();
     }
 
     interface Presenter{
 
         void getInstance();
-        void onDataChanged();
-
     }
 }

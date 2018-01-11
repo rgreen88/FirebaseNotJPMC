@@ -9,9 +9,9 @@ public class FirebaseDbModel {
     //empty constructor
     public FirebaseDbModel(){}
 
-//    public String getInstance(){
-//
-//        return r;
-//
-//    }
+    public void getInstance(){
+
+
+
+    }
 }

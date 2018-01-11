@@ -5,4 +5,16 @@ package com.example.ryne.jpmclookalikemvp.view;
  */
 
 public interface MainContract {
+
+    interface  View {
+
+        void onDataChange();
+
+    }
+
+    interface Presenter{
+
+        void getInstance();
+
+    }
 }

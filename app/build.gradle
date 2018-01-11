@@ -26,7 +26,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    //firebase database dependency
+    //firebase ui authentication and database dependencies
+    implementation('com.firebaseui:firebase-ui-auth:3.1.2') {
+        exclude group: 'com.google.android.gms'
+        exclude group: 'com.google.firebase'
+    }
+
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
     implementation 'com.google.firebase:firebase-database:11.8.0'
 }
 

@@ -5,4 +5,13 @@ package com.example.ryne.jpmclookalikemvp.model;
  */
 
 public class FirebaseDbModel {
+
+    //empty constructor
+    public FirebaseDbModel(){}
+
+//    public String getInstance(){
+//
+//        return r;
+//
+//    }
 }

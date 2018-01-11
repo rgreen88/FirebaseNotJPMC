@@ -8,7 +8,7 @@ public interface MainContract {
 
     interface  View {
 
-        void onDataChange();
+        void onDataChange(String readFromDb);
 
     }
 

@@ -29,32 +29,14 @@ public class MainPresenter implements MainContract.Presenter{
     }
 
     @Override
-    public void getInstance() {
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("message");
-
-        String readFromDb = myRef.setValue("Hello, World!").toString();
+    public void getInstance(String readFromDb) {
+        readFromDb = firebaseDbModel.getInstance();
         mView.showInstance(readFromDb);
     }
 
     @Override
-    public void onDataChanged() {
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
+    public void onDataChanged(String writeToDb) {
+        writeToDb = firebaseDbModel.onDataChanged();
+        mView.showInstance(writeToDb);
     }
 }

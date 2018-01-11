@@ -14,8 +14,8 @@ public interface MainContract {
 
     interface Presenter{
 
-        void getInstance();
-        void onDataChanged();
+        void getInstance(String readFromDb);
+        void onDataChanged(String writeToDb);
 
     }
 }

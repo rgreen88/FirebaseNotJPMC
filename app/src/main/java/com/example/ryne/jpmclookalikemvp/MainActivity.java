@@ -32,3 +32,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         Toast.makeText(this, "Reading/Writing", Toast.LENGTH_SHORT).show();
     }
 }
+
+//TODO: CipherHandler class
+//TODO: FirebaseAuthenticationHandler

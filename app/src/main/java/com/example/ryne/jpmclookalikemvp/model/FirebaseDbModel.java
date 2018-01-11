@@ -21,15 +21,15 @@ public class FirebaseDbModel {
 
     private DatabaseReference myRef; //private reference for use in different methods
 
-    public String getInstance() {
+    public void getInstance() {
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference("message");
 
-        return myRef.setValue("Hello, World!").toString();
+        myRef.setValue("Hello, World!");
     }
 
-    public String onDataChanged() {
+    public void onDataChanged() {
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -46,7 +46,5 @@ public class FirebaseDbModel {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-        return myRef.toString();
     }
 }

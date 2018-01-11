@@ -8,14 +8,14 @@ public interface MainContract {
 
     interface  View {
 
-        void showInstance(String readFromDb);
+        void showInstance();
 
     }
 
     interface Presenter{
 
-        void getInstance(String readFromDb);
-        void onDataChanged(String writeToDb);
+        void getInstance();
+        void onDataChanged();
 
     }
 }

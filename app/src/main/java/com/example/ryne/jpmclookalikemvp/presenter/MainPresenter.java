@@ -20,14 +20,14 @@ public class MainPresenter implements MainContract.Presenter{
     }
 
     @Override
-    public void getInstance(String readFromDb) {
-        readFromDb = firebaseDbModel.getInstance();
-        mView.showInstance(readFromDb);
+    public void getInstance() {
+        firebaseDbModel.getInstance();
+        mView.showInstance();
     }
 
     @Override
-    public void onDataChanged(String writeToDb) {
-        writeToDb = firebaseDbModel.onDataChanged();
-        mView.showInstance(writeToDb);
+    public void onDataChanged() {
+        firebaseDbModel.onDataChanged();
+        mView.showInstance();
     }
 }

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "263826258484",
+    "firebase_url": "https://jpmclookalikemvp.firebaseio.com",
+    "project_id": "jpmclookalikemvp",
+    "storage_bucket": "jpmclookalikemvp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263826258484:android:f7a982c8bb5f2411",
+        "android_client_info": {
+          "package_name": "com.example.ryne.jpmclookalikemvp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263826258484-4go09r0h7lch59mjaapjv3p12n0tko8l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ryne.jpmclookalikemvp",
+            "certificate_hash": "26ad2cb47536383a9817c9d72b0084b5fd1c7ae3"
+          }
+        },
+        {
+          "client_id": "263826258484-352jojk5k7jf50ara8n0tm3rac63g51k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgD9H-W726LSB_BbDlu5gVIQTCTNNGoqk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263826258484-352jojk5k7jf50ara8n0tm3rac63g51k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

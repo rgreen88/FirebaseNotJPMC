@@ -26,8 +26,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
 
+    //toast to inform user db is being read
     @Override
-    public void showInstance(String readFromDb) {
+    public void showInstance() {
         Toast.makeText(this, "reading", Toast.LENGTH_SHORT).show();
+    }
+
+    //calling to write to db at end
+    @Override
+    public void onFinish(){
+        presenter.onDataChanged();
+        Toast.makeText(this, "writing", Toast.LENGTH_SHORT).show();
     }
 }

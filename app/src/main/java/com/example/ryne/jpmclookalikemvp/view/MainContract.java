@@ -10,6 +10,7 @@ public interface MainContract {
 
         void showInstance();
 
+        void onFinish();
     }
 
     interface Presenter{

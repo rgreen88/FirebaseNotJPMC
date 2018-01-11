@@ -28,6 +28,6 @@ public class MainPresenter implements MainContract.Presenter{
     @Override
     public void onDataChanged() {
         firebaseDbModel.onDataChanged();
-        mView.showInstance();
+        mView.onFinish();
     }
 }

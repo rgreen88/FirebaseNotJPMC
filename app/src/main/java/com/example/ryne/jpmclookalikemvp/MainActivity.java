@@ -4,17 +4,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.ryne.jpmclookalikemvp.model.util.FirebaseAuthHandler;
 import com.example.ryne.jpmclookalikemvp.presenter.MainPresenter;
 import com.example.ryne.jpmclookalikemvp.view.MainContract;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     MainPresenter presenter;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //init firebase instance
+        mAuth = FirebaseAuth.getInstance();
 
         presenter = new MainPresenter(this);
     }

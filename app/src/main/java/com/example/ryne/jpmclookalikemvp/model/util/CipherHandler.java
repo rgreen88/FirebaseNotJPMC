@@ -46,4 +46,14 @@ public class CipherHandler {
 
     }
 
+    //decrypt method
+    public String decrypt(String data, Key key) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException{
+
+        //initializing decrypt mode for key
+        byte[] encryptedData = Base64.decode(data, Base64.DEFAULT);
+        byte[] decryptedData = cipher.doFinal(encryptedData);
+
+        //convert decryptedData to String upon return
+        return new String(decryptedData);
+    }
 }

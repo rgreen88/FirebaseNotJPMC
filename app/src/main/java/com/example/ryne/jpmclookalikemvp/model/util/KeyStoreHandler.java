@@ -18,6 +18,9 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.Calendar;
 
@@ -103,6 +106,19 @@ public class KeyStoreHandler {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 
-//    public KeyPair
+    //Asymmetric Key Pairing returns private and public key
+    public KeyPair getAKSAsymmetricKeyPair(String alias) throws UnrecoverableKeyException, NoSuchAlgorithmException, KeyStoreException{
 
+        PrivateKey privateKey = (PrivateKey) keyStore.getKey(alias, null);
+        PublicKey publicKey = keyStore.getCertificate(alias).getPublicKey();
+
+        if (privateKey != null && publicKey != null)
+            return new KeyPair(publicKey, privateKey);
+        else
+            return null;
+    }
+
+    public void removeAKSKey(String alias) throws KeyStoreException{
+        keyStore.deleteEntry(alias);
+    }
 }

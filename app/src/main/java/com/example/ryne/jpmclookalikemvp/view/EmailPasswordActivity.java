@@ -1,6 +1,7 @@
 package com.example.ryne.jpmclookalikemvp.view;
 
 import android.app.ProgressDialog;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,7 +21,9 @@ import com.google.firebase.auth.FirebaseUser;
  * Created by rynel on 1/15/2018.
  */
 
-public class EmailPasswordActivity extends MainActivity implements View.OnClickListener{
+//Firebase console needed to be enabled under authentication
+
+public class EmailPasswordActivity extends MainActivity implements View.OnClickListener {
 
     private static final String TAG = "EmailPassword";
 
@@ -32,16 +35,32 @@ public class EmailPasswordActivity extends MainActivity implements View.OnClickL
     private EditText ed_email;
     private EditText ed_Password;
 
-    //Start checking user
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_emailpassword);
 
         //binding views
         tv_status = findViewById(R.id.tv_status);
         tv_detail = findViewById(R.id.tv_detail);
         ed_email = findViewById(R.id.ed_email);
         ed_Password = findViewById(R.id.ed_password);
+
+        //setting buttons
+        findViewById(R.id.email_sign_in_button).setOnClickListener(this);
+        findViewById(R.id.email_create_account_button).setOnClickListener(this);
+        findViewById(R.id.sign_out_button).setOnClickListener(this);
+        findViewById(R.id.verify_email_button).setOnClickListener(this);
+
+        //starting firebase
+        mAuth = FirebaseAuth.getInstance();
+
+    }
+
+    //Start checking user
+    @Override
+    public void onStart() {
+        super.onStart();
 
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -107,7 +126,6 @@ public class EmailPasswordActivity extends MainActivity implements View.OnClickL
                             updateUI(null);
                         }
 
-                        // [START_EXCLUDE]
                         if (!task.isSuccessful()) {
                             tv_status.setText(R.string.auth_failed);
                         }
@@ -147,6 +165,7 @@ public class EmailPasswordActivity extends MainActivity implements View.OnClickL
                     }
                 });
     }
+
 
 
     //toast to inform user app is reading/writing db

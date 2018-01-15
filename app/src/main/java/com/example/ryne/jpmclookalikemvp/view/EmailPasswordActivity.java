@@ -1,6 +1,5 @@
 package com.example.ryne.jpmclookalikemvp.view;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -164,38 +163,6 @@ public class EmailPasswordActivity extends MainActivity implements View.OnClickL
                         }
                     }
                 });
-    }
-
-
-
-    //toast to inform user app is reading/writing db
-    @Override
-    public void showInstance() {
-        Toast.makeText(this, "Reading/Writing", Toast.LENGTH_SHORT).show();
-    }
-
-    public ProgressDialog mProgressDialog;
-
-    public void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.setIndeterminate(true);
-        }
-
-        mProgressDialog.show();
-    }
-
-    public void hideProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        hideProgressDialog();
     }
 
     public boolean validateForm() {

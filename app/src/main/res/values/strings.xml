@@ -11,4 +11,5 @@
     <string name="sign_in">Sign in</string>
     <string name="hint_password">password</string>
     <string name="hint_email">Email Address</string>
+    <string name="auth_failed">authentication failed</string>
 </resources>

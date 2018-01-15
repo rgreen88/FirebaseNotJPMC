@@ -13,4 +13,8 @@
     <string name="hint_email">Email Address</string>
     <string name="auth_failed">authentication failed</string>
     <string name="loading">Loading...</string>
+    <string name="dummy_variable">dummy</string>
+    <string name="something">something</string>
+    <string name="bank">bank account</string>
+    <string name="balance">Balance</string>
 </resources>

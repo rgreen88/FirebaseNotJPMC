@@ -8,5 +8,7 @@ package com.example.ryne.jpmclookalikemvp.model.util;
 public class FirebaseAuthHandler {
 
     //TODO: Create updateID method
-    //TODO: Create EmailPasswordActivity class
+    //TODO: Create a new createAccount method --> createUserWithEmailAndPassword
+    //TODO: Create EmailPasswordActivity class --> signIn method --> signInWithEmailAndPassword
+    //TODO: Create getCurrentUser method
 }

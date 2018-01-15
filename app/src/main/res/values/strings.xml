@@ -17,4 +17,7 @@
     <string name="something">something</string>
     <string name="bank">bank account</string>
     <string name="balance">Balance</string>
+    <string name="dummy_business_transaction">dummy business transaction</string>
+    <string name="user">user</string>
+    <string name="transaction">transaction amount</string>
 </resources>

@@ -14,11 +14,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="user"
+        android:text="@string/user"
         android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/tv_current_degree"
+        android:id="@+id/tv_bank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -28,7 +28,7 @@
         android:textSize="56sp" />
 
     <TextView
-        android:id="@+id/tv_weather_condition"
+        android:id="@+id/tv_balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -47,27 +47,40 @@
         tools:targetApi="lollipop">
 
         <TextView
-            android:id="@+id/tv_days"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_business_transaction"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@string/dummy_variable"
-            android:textSize="21sp" />
+            android:text="@string/dummy_business_transaction"
+            android:textSize="24sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="144dp"
-            android:paddingTop="56dp">
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingTop="48dp">
 
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/lightGray" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/transaction"
+                android:textSize="18sp" />
 
         </RelativeLayout>
 

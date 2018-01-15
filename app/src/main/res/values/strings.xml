@@ -20,4 +20,6 @@
     <string name="dummy_business_transaction">dummy business transaction</string>
     <string name="user">user</string>
     <string name="transaction">transaction amount</string>
+    <string name="checking_acct">dummy_checking_account</string>
+    <string name="pay_bills">Pay bills</string>
 </resources>

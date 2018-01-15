@@ -36,14 +36,26 @@
         tools:targetApi="lollipop">
 
         <TextView
-            android:id="@+id/tv_business_transaction"
+            android:id="@+id/tv_pay_bills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="150dp"
+            android:text="@string/pay_bills"
+            android:textAlignment="textEnd"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_checking_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@string/dummy_business_transaction"
+            android:text="@string/checking_acct"
             android:textSize="24sp" />
 
         <RelativeLayout
@@ -54,22 +66,34 @@
 
             <View
                 android:id="@+id/view"
+                android:layout_marginTop="64dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lightGray" />
+                android:background="@color/lightGray"
+                />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
+
                 android:paddingTop="8dp"
                 android:text="@string/transaction"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_available_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="Available balance"
+                android:textAlignment="viewEnd"
+                android:gravity="end" />
 
         </RelativeLayout>
 

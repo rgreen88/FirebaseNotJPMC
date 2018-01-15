@@ -39,6 +39,9 @@ public class EmailPasswordActivity extends MainActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emailpassword);
 
+        //starting firebase
+        mAuth = FirebaseAuth.getInstance();
+
         //binding views
         tv_status = findViewById(R.id.tv_status);
         tv_detail = findViewById(R.id.tv_detail);
@@ -76,7 +79,7 @@ public class EmailPasswordActivity extends MainActivity implements View.OnClickL
 
         showProgressDialog();
 
-        //Sign in start process
+        //create account start process
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

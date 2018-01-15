@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class EmailPasswordActivity extends MainActivity{
 
+    private static final String TAG = "EmailPassword";
+
     private FirebaseAuth mAuth;
 
     //Start checking user

@@ -87,20 +87,20 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public boolean validateForm() {
         boolean valid = true;
 
-        String email = mEmailField.getText().toString();
+        String email = ed_email.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            mEmailField.setError("Required.");
+            ed_email.setError("Required.");
             valid = false;
         } else {
-            mEmailField.setError(null);
+            ed_email.setError(null);
         }
 
-        String password = mPasswordField.getText().toString();
+        String password = ed_Password.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            mPasswordField.setError("Required.");
+            ed_Password.setError("Required.");
             valid = false;
         } else {
-            mPasswordField.setError(null);
+            ed_Password.setError(null);
         }
 
         return valid;
@@ -109,9 +109,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
-            mStatusTextView.setText(getString(R.string.emailpassword_status_fmt,
-                    user.getEmail(), user.isEmailVerified()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+            tv_status.setText(R.string.verification_check);
+            tv_detail.setText(R.string.verify);
 
             findViewById(R.id.email_password_buttons).setVisibility(View.GONE);
             findViewById(R.id.email_password_fields).setVisibility(View.GONE);
@@ -119,8 +118,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
             findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
         } else {
-            mStatusTextView.setText(R.string.signed_out);
-            mDetailTextView.setText(null);
+            tv_status.setText(R.string.signed_out);
+            tv_detail.setText(null);
 
             findViewById(R.id.email_password_buttons).setVisibility(View.VISIBLE);
             findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);

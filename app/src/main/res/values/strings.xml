@@ -2,4 +2,13 @@
     <string name="app_name">JPMCLookAlikeMVP</string>
     <string name="password">Password</string>
     <string name="e_mail">E-mail Address</string>
+    <string name="verification_check">checking for user verification</string>
+    <string name="verify">Verified</string>
+    <string name="signed_out">Signed out</string>
+    <string name="verify_email">Verifying email</string>
+    <string name="sign_out">Sign out</string>
+    <string name="create_account">Create account</string>
+    <string name="sign_in">Sign in</string>
+    <string name="hint_password">password</string>
+    <string name="hint_email">Email Address</string>
 </resources>

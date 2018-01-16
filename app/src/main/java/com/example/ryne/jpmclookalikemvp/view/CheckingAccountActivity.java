@@ -1,16 +1,21 @@
 package com.example.ryne.jpmclookalikemvp.view;
 
 import android.app.ProgressDialog;
+import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.ryne.jpmclookalikemvp.R;
-import com.example.ryne.jpmclookalikemvp.presenter.MainPresenter;
 
-public class MainActivity extends AppCompatActivity {
+public class CheckingAccountActivity extends AppCompatActivity {
 
     private static final String TAG = "log";
-    MainPresenter presenter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.card_view_layout);
+    }
 
     @VisibleForTesting
     public ProgressDialog mProgressDialog;

@@ -20,17 +20,17 @@ public class FirebaseDbModel {
     public FirebaseDbModel() {
     }
 
-    private DatabaseReference myRef; //private reference for use in different methods
+    private DatabaseReference jpmcRef; //private reference for adding/using database data
 
     public void getInstance() {
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("message");
+        jpmcRef = database.getReference("message");
 
-        myRef.setValue("Hello, World!");
+        jpmcRef.setValue("Hello, World!");
 
         // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+        jpmcRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again

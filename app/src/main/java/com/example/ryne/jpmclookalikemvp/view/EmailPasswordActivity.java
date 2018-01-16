@@ -1,5 +1,6 @@
 package com.example.ryne.jpmclookalikemvp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -22,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 //Firebase console needed to be enabled under authentication
 
-public class EmailPasswordActivity extends MainActivity implements View.OnClickListener {
+public class EmailPasswordActivity extends CheckingAccountActivity implements View.OnClickListener {
 
     private static final String TAG = "EmailPassword";
 
@@ -52,7 +53,7 @@ public class EmailPasswordActivity extends MainActivity implements View.OnClickL
         findViewById(R.id.email_sign_in_button).setOnClickListener(this);
         findViewById(R.id.email_create_account_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.verify_email_button).setOnClickListener(this);
+        findViewById(R.id.btn_checking).setOnClickListener(this);
 
         //starting firebase
         mAuth = FirebaseAuth.getInstance();
@@ -141,32 +142,32 @@ public class EmailPasswordActivity extends MainActivity implements View.OnClickL
         updateUI(null);
     }
 
-    private void sendEmailVerification() {
-        // Disable button at the start
-        findViewById(R.id.verify_email_button).setEnabled(false);
-
-        // Send verification email
-        final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // Enabling verfify e-mail button
-                        findViewById(R.id.verify_email_button).setEnabled(true);
-
-                        if (task.isSuccessful()) {
-                            Toast.makeText(EmailPasswordActivity.this,
-                                    "Verification email sent to " + user.getEmail(),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Log.e(TAG, "sendEmailVerification", task.getException());
-                            Toast.makeText(EmailPasswordActivity.this,
-                                    "Failed to send verification email.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
+//    private void sendEmailVerification() {
+//        // Disable button at the start
+//        findViewById(R.id.btn_checking).setEnabled(false);
+//
+//        // Send verification email
+//        final FirebaseUser user = mAuth.getCurrentUser();
+//        user.sendEmailVerification()
+//                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        // Enabling verfify e-mail button
+//                        findViewById(R.id.btn_checking).setEnabled(true);
+//
+//                        if (task.isSuccessful()) {
+//                            Toast.makeText(EmailPasswordActivity.this,
+//                                    "Verification email sent to " + user.getEmail(),
+//                                    Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Log.e(TAG, "sendEmailVerification", task.getException());
+//                            Toast.makeText(EmailPasswordActivity.this,
+//                                    "Failed to send verification email.",
+//                                    Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//    }
 
     public boolean validateForm() {
         boolean valid = true;
@@ -200,7 +201,8 @@ public class EmailPasswordActivity extends MainActivity implements View.OnClickL
             findViewById(R.id.email_password_fields).setVisibility(View.GONE);
             findViewById(R.id.signed_in_buttons).setVisibility(View.VISIBLE);
 
-            findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
+            //checking account activity
+            findViewById(R.id.btn_checking).setEnabled(!user.isEmailVerified());
         } else {
             tv_status.setText(R.string.signed_out);
             tv_detail.setText(null);
@@ -221,8 +223,14 @@ public class EmailPasswordActivity extends MainActivity implements View.OnClickL
             signIn(ed_email.getText().toString(), ed_Password.getText().toString());
         } else if (i == R.id.sign_out_button) {
             signOut();
-        } else if (i == R.id.verify_email_button) {
-            sendEmailVerification();
+        } else if (i == R.id.btn_checking) {
+            launchMainActivity();
         }
+    }
+
+    private void launchMainActivity(){
+        Intent intent = new Intent(this, CheckingAccountActivity.class);
+        startActivity(intent);
+
     }
 }

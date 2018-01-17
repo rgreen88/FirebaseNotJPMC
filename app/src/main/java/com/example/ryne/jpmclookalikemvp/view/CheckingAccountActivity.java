@@ -25,6 +25,7 @@ public class CheckingAccountActivity extends AppCompatActivity {
 
     private static final int NUM_LIST_ITEMS = 50;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,6 @@ public class CheckingAccountActivity extends AppCompatActivity {
         //setting adapter
         mAdapter = new RecyclerViewAdapter(NUM_LIST_ITEMS, this);
         mCheckingAccountList.setAdapter(mAdapter);
-
     }
 
     @VisibleForTesting
@@ -73,5 +73,4 @@ public class CheckingAccountActivity extends AppCompatActivity {
         super.onStop();
         hideProgressDialog();
     }
-
 }

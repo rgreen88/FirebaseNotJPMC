@@ -24,7 +24,7 @@ public class BaseActivity extends AppCompatActivity{
     public void setContentView(int layoutResID)
     {
         DrawerLayout fullView = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
-        FrameLayout activityContainer = fullView.findViewById(R.id.action_settings);
+        FrameLayout activityContainer = fullView.findViewById(R.id.nvView);
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullView);
         Toolbar toolbar = findViewById(R.id.toolbar);

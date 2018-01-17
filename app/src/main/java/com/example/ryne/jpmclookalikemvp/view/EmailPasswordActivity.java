@@ -58,7 +58,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_emailpassword);
 
         // Find our drawer view
-        nvDrawer = findViewById(R.id.nvView);
+        nvDrawer = findViewById(R.id.navigationView);
 
         // Setup drawer view
         setupDrawerContent(nvDrawer);

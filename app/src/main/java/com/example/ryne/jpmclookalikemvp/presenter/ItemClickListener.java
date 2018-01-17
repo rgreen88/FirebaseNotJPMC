@@ -5,4 +5,7 @@ package com.example.ryne.jpmclookalikemvp.presenter;
  */
 
 public interface ItemClickListener {
+
+    void onItemClick(int position);
+
 }

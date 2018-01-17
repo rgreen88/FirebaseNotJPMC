@@ -14,8 +14,7 @@ import com.example.ryne.jpmclookalikemvp.R;
  * Created by rynel on 1/16/2018.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.CheckingBalanceHolder> implements
-        View.OnClickListener{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.CheckingBalanceHolder>{
 
     private static final String TAG = RecyclerViewAdapter.class.getSimpleName();
 
@@ -35,8 +34,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
         CheckingBalanceHolder viewHolder = new CheckingBalanceHolder(view);
 
-        view.setOnClickListener(this);
-
         return viewHolder;
     }
 
@@ -53,17 +50,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mCheckingBalanceItem;
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     class CheckingBalanceHolder extends RecyclerView.ViewHolder{
 
         //display position in list using getItemCount() - 1
         TextView listCheckingBalanceView;
 
-        //constructor for ViewHolder
+        //constructor for ViewHolder with int reference to weather condition
         public CheckingBalanceHolder(View itemView){
             super(itemView);
 
@@ -74,7 +66,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             listCheckingBalanceView.setText(String.valueOf(listIndex));
         }
     }
-
-
 
 }

@@ -59,6 +59,7 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
 
         // Find our drawer view
         nvDrawer = findViewById(R.id.nvView);
+
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
@@ -98,13 +99,20 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
         //starting firebase
         mAuth = FirebaseAuth.getInstance();
 
+//        // Lookup navigation view
+//        NavigationView navigationView = findViewById(R.id.nvView);
+//
+//        // Inflate the header view at runtime
+//        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header);
+//        headerLayout = navigationView.getHeaderView(0);
+
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         selectDrawerItem(menuItem);
                         return true;
                     }

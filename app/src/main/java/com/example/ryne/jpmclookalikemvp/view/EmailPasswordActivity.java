@@ -1,12 +1,12 @@
 package com.example.ryne.jpmclookalikemvp.view;
 
-import android.support.v4.app.Fragment;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -58,7 +58,7 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
         setContentView(R.layout.activity_emailpassword);
 
         // Find our drawer view
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        nvDrawer = findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
@@ -68,6 +68,17 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
 
         // Find our drawer view
         mDrawer = findViewById(R.id.drawer_layout);
+
+        // Set a Toolbar to replace the ActionBar.
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Find our drawer view
+        mDrawer = findViewById(R.id.drawer_layout);
+        drawerToggle = setupDrawerToggle();
+
+        // Tie DrawerLayout events to the ActionBarToggle
+        mDrawer.addDrawerListener(drawerToggle);
 
         //starting firebase
         mAuth = FirebaseAuth.getInstance();
@@ -87,18 +98,6 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
         //starting firebase
         mAuth = FirebaseAuth.getInstance();
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // The action bar home/up action should open or close the drawer.
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawer.openDrawer(GravityCompat.START);
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -145,6 +144,35 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
         setTitle(menuItem.getTitle());
         // Close the navigation drawer
         mDrawer.closeDrawers();
+    }
+
+    private ActionBarDrawerToggle setupDrawerToggle() {
+        // NOTE: Make sure you pass in a valid toolbar reference. ActionBarDrawToggle() does not require it
+        // and will not render the hamburger icon without it.
+        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+    }
+
+    //in case some change such as screen rotation occurs
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //Start checking user
@@ -229,33 +257,6 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
         mAuth.signOut();
         updateUI(null);
     }
-
-//    private void sendEmailVerification() {
-//        // Disable button at the start
-//        findViewById(R.id.btn_checking).setEnabled(false);
-//
-//        // Send verification email
-//        final FirebaseUser user = mAuth.getCurrentUser();
-//        user.sendEmailVerification()
-//                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        // Enabling verfify e-mail button
-//                        findViewById(R.id.btn_checking).setEnabled(true);
-//
-//                        if (task.isSuccessful()) {
-//                            Toast.makeText(EmailPasswordActivity.this,
-//                                    "Verification email sent to " + user.getEmail(),
-//                                    Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Log.e(TAG, "sendEmailVerification", task.getException());
-//                            Toast.makeText(EmailPasswordActivity.this,
-//                                    "Failed to send verification email.",
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
 
     public boolean validateForm() {
         boolean valid = true;

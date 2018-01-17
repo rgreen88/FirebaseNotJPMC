@@ -1,16 +1,9 @@
 <resources>
-
-    <resources>
-        <!-- Base application theme. -->
-        <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-            <item name="colorPrimary">#673AB7</item>
-            <item name="colorPrimaryDark">#512DA8</item>
-            <item name="colorAccent">#FF4081</item>
-        </style>
-    </resources>
-    <!--use item name="drawerArrowStyle" if you are using dark primaryColor in your app, else remove it-->
-    <style name="MaterialDrawer.DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="spinBars">false</item>
-        <item name="color">@android:color/white</item>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#673AB7</item>
+        <item name="colorPrimaryDark">#512DA8</item>
+        <item name="colorAccent">#FF4081</item>
     </style>
 </resources>
+

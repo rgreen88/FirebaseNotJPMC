@@ -20,7 +20,6 @@
         </activity>
         <activity android:name=".view.CheckingAccountActivity" />
         <activity android:name=".view.TransactionsActivity" />
-        <activity android:name=".view.NavDrawerActivity" />
     </application>
 
 </manifest>

@@ -3,14 +3,13 @@ package com.example.ryne.jpmclookalikemvp.view;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.ryne.jpmclookalikemvp.R;
 
-public class CheckingAccountActivity extends AppCompatActivity {
+public class CheckingAccountActivity extends BaseActivity {
 
     private static final String TAG = "log";
 

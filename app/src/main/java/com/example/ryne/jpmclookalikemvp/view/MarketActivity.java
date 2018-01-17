@@ -1,7 +1,6 @@
 package com.example.ryne.jpmclookalikemvp.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import com.example.ryne.jpmclookalikemvp.R;
  * Created by rynel on 1/16/2018.
  */
 
-public class MarketActivity extends AppCompatActivity{
+public class MarketActivity extends BaseActivity{
 
     //TextViews
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;

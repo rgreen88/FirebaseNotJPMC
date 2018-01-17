@@ -31,7 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 //Firebase console needed to be enabled under authentication
 
-public class EmailPasswordActivity extends CheckingAccountActivity implements View.OnClickListener {
+public class EmailPasswordActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "EmailPassword";
 
@@ -201,8 +201,6 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
             return;
         }
 
-        showProgressDialog();
-
         //create account start process
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -220,7 +218,6 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
-                        hideProgressDialog();
                     }
                 });
     }
@@ -231,8 +228,6 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
         if (!validateForm()) {
             return;
         }
-
-        showProgressDialog();
 
         //sign-in with email
         mAuth.signInWithEmailAndPassword(email, password)
@@ -256,7 +251,6 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
                         if (!task.isSuccessful()) {
                             tv_status.setText(R.string.auth_failed);
                         }
-                        hideProgressDialog();
                     }
                 });
     }
@@ -289,7 +283,6 @@ public class EmailPasswordActivity extends CheckingAccountActivity implements Vi
     }
 
     public void updateUI(FirebaseUser user) {
-        hideProgressDialog();
         if (user != null) {
             tv_status.setText(R.string.verification_check);
             tv_detail.setText(R.string.verify);

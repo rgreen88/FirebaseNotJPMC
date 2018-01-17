@@ -1,18 +1,14 @@
 package com.example.ryne.jpmclookalikemvp.view;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -57,29 +53,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emailpassword);
 
-        // Find our drawer view
-        nvDrawer = findViewById(R.id.navigationView);
 
-        // Setup drawer view
-        setupDrawerContent(nvDrawer);
-
-        // Set a Toolbar to replace the ActionBar.
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        // Find our drawer view
-        mDrawer = findViewById(R.id.drawer_layout);
-
-        // Set a Toolbar to replace the ActionBar.
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        // Find our drawer view
-        mDrawer = findViewById(R.id.drawer_layout);
-        drawerToggle = setupDrawerToggle();
-
-        // Tie DrawerLayout events to the ActionBarToggle
-        mDrawer.addDrawerListener(drawerToggle);
 
         //starting firebase
         mAuth = FirebaseAuth.getInstance();
@@ -99,89 +73,9 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
         //starting firebase
         mAuth = FirebaseAuth.getInstance();
 
-//        // Lookup navigation view
-//        NavigationView navigationView = findViewById(R.id.nvView);
-//
-//        // Inflate the header view at runtime
-//        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header);
-//        headerLayout = navigationView.getHeaderView(0);
-
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
-                    }
-                });
-    }
 
-    public void selectDrawerItem(MenuItem menuItem) {
-        // Create a new fragment and specify the fragment to show based on nav item clicked
-        Fragment fragment = null;
-        Class fragmentClass;
-        switch(menuItem.getItemId()) {
-            case R.id.nav_checking_fragment:
-                fragmentClass = CheckingAccountActivity.class;
-                break;
-            case R.id.nav_transactions_fragment:
-                fragmentClass = TransactionsActivity.class;
-                break;
-            case R.id.nav_market_fragment:
-                fragmentClass = MarketActivity.class;
-                break;
-            default:
-                fragmentClass = CheckingAccountActivity.class;
-        }
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
-        // Highlight the selected item has been done by NavigationView
-        menuItem.setChecked(true);
-        // Set action bar title
-        setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-        mDrawer.closeDrawers();
-    }
-
-    private ActionBarDrawerToggle setupDrawerToggle() {
-        // NOTE: Make sure you pass in a valid toolbar reference. ActionBarDrawToggle() does not require it
-        // and will not render the hamburger icon without it.
-        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
-    }
-
-    //in case some change such as screen rotation occurs
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggles
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     //Start checking user
     @Override

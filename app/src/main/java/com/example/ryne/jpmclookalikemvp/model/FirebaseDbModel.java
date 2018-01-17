@@ -25,9 +25,9 @@ public class FirebaseDbModel {
     public void getInstance() {
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        jpmcRef = database.getReference("message");
+        jpmcRef = database.getReference("Greeting");
 
-        jpmcRef.setValue("Hello, World!");
+        jpmcRef.setValue("Today's date");
 
         // Read from the database
         jpmcRef.addValueEventListener(new ValueEventListener() {

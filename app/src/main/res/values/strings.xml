@@ -22,4 +22,8 @@
     <string name="checking_acct">dummy_checking_account</string>
     <string name="pay_bills">Pay bills</string>
     <string name="checking">Checking Account</string>
+    <string name="currency">Currency</string>
+    <string name="available_balance">Available balance</string>
+    <string name="current_date">current date</string>
+    <string name="greeting">greeting</string>
 </resources>

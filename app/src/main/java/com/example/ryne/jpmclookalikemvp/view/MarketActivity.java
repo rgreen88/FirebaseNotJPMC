@@ -1,8 +1,6 @@
 package com.example.ryne.jpmclookalikemvp.view;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +8,11 @@ import android.widget.TextView;
 
 import com.example.ryne.jpmclookalikemvp.R;
 
-public class CheckingAccountActivity extends AppCompatActivity {
+/**
+ * Created by rynel on 1/16/2018.
+ */
 
-    private static final String TAG = "log";
+public class MarketActivity extends AppCompatActivity{
 
     //TextViews
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
@@ -46,32 +46,5 @@ public class CheckingAccountActivity extends AppCompatActivity {
         //setting adapter
         mAdapter = new RecyclerViewAdapter(NUM_LIST_ITEMS);
         mCheckingAccountList.setAdapter(mAdapter);
-
     }
-
-    @VisibleForTesting
-    public ProgressDialog mProgressDialog;
-
-    public void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(getString(R.string.loading));
-            mProgressDialog.setIndeterminate(true);
-        }
-
-        mProgressDialog.show();
-    }
-
-    public void hideProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        hideProgressDialog();
-    }
-
 }

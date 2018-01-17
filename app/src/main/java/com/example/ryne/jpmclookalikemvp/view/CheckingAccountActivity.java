@@ -44,7 +44,7 @@ public class CheckingAccountActivity extends AppCompatActivity {
         mCheckingAccountList.setHasFixedSize(true);
 
         //setting adapter
-        mAdapter = new RecyclerViewAdapter(NUM_LIST_ITEMS);
+        mAdapter = new RecyclerViewAdapter(NUM_LIST_ITEMS, this);
         mCheckingAccountList.setAdapter(mAdapter);
 
     }

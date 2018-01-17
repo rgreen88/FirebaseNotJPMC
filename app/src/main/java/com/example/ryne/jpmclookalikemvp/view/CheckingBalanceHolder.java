@@ -11,11 +11,11 @@ import com.example.ryne.jpmclookalikemvp.presenter.ItemClickListener;
  * Created by rynel on 1/16/2018.
  */
 
-public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class CheckingBalanceHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     TextView nameTxt;
     ItemClickListener itemClickListener;
 
-    public RecyclerViewHolder(View itemView) {
+    public CheckingBalanceHolder(View itemView) {
         super(itemView);
 
         nameTxt= itemView.findViewById(R.id.tv_checking_account);

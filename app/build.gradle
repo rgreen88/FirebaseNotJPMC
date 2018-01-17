@@ -34,7 +34,11 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:11.8.0'
     implementation 'com.google.firebase:firebase-database:11.8.0'
+
+    //placeholder wrapper
+    implementation 'com.mindorks:placeholderview:0.7.2'
 }
+
 
 
 apply plugin: 'com.google.gms.google-services'

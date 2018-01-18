@@ -8,8 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.ryne.jpmclookalikemvp.R;
+import com.example.ryne.jpmclookalikemvp.model.FirebaseDbModel;
 
-public class CheckingAccountActivity extends BaseActivity {
+public class CheckingAccountActivity extends BaseActivity{
 
     private static final String TAG = "log";
 
@@ -24,11 +25,16 @@ public class CheckingAccountActivity extends BaseActivity {
 
     private static final int NUM_LIST_ITEMS = 50;
 
+    FirebaseDbModel checkingAccount;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        checkingAccount.getCheckingAccount();
 
         //binding
         mGreeting = findViewById(R.id.tv_greeting);
@@ -46,6 +52,7 @@ public class CheckingAccountActivity extends BaseActivity {
         //setting adapter
         mAdapter = new RecyclerViewAdapter(NUM_LIST_ITEMS, this);
         mCheckingAccountList.setAdapter(mAdapter);
+
     }
 
     @VisibleForTesting

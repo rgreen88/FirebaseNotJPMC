@@ -70,9 +70,6 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.btn_checking).setOnClickListener(this);
 
-        //starting firebase
-        mAuth = FirebaseAuth.getInstance();
-
     }
 
 

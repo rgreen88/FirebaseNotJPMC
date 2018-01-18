@@ -2,8 +2,7 @@ package com.example.ryne.jpmclookalikemvp.model;
 
 import android.util.Log;
 
-import com.example.ryne.jpmclookalikemvp.presenter.MainPresenter;
-import com.example.ryne.jpmclookalikemvp.view.MainContract;
+import com.example.ryne.jpmclookalikemvp.view.BaseActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,12 +15,12 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
  * Created by Ryne on 1/11/2018.
  */
 
-public class FirebaseDbModel extends MainPresenter {
+public class FirebaseDbModel extends BaseActivity {
 
     private DatabaseReference jpmcRef; //private reference for adding/using database data
 
-    public FirebaseDbModel(MainContract.View mView) {
-        super(mView);
+    public FirebaseDbModel() {
+
     }
 
     public void getInstance() {

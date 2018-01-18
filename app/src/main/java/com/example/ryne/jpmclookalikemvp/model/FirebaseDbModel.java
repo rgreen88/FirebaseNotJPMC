@@ -23,11 +23,16 @@ public class FirebaseDbModel {
     private DatabaseReference jpmcRef; //private reference for adding/using database data
 
     public void getInstance() {
+
+        //setting up dummy data
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        jpmcRef = database.getReference("Greeting");
+        jpmcRef = database.getReference("Customer");
+        jpmcRef.setValue("Ryne Green");
 
-        jpmcRef.setValue("Today's date");
+        jpmcRef = database.getReference("Checking Account");
+        jpmcRef.setValue("Balance: 1000.00");
+        jpmcRef.setValue("Avalailable Credit: 1000.00");
 
         // Read from the database
         jpmcRef.addValueEventListener(new ValueEventListener() {

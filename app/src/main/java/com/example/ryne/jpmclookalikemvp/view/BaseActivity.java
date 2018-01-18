@@ -113,9 +113,9 @@ public class BaseActivity extends AppCompatActivity{
                 break;
             case R.id.sign_out_button:
                 mAuth.signOut(); //will crash
-            default:
-                intent = new Intent(this, CheckingAccountActivity.class);
-                startActivity(intent);
+//            default:
+//                intent = new Intent(this, CheckingAccountActivity.class);
+//                startActivity(intent);
         }
         try {
 //            fragment = (Fragment) fragmentClass.newInstance();
@@ -132,7 +132,7 @@ public class BaseActivity extends AppCompatActivity{
         // Set action bar title
         setTitle(menuItem.getTitle());
         // Close the navigation drawer
-        mDrawer.closeDrawers();
+//        mDrawer.closeDrawers();
     }
 
 //    //in case some change such as screen rotation occurs

@@ -1,94 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:elevation="@dimen/cardview_default_elevation"
-        card_view:cardCornerRadius="@dimen/cardview_default_radius"
-        card_view:contentPadding="@dimen/default_padding"
-        tools:targetApi="lollipop">
-
+        android:layout_height="113dp">
 
         <TextView
-            android:id="@+id/tv_total_value"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_currency"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="150dp"
-            android:text="@string/total_value"
-            android:textAlignment="textEnd"
-            android:textSize="18sp"
-            android:layout_gravity="end" />
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/default_padding"
+            android:text="@string/transactions"
+            android:textAlignment="center"
+            android:textSize="32sp" />
 
         <TextView
-            android:id="@+id/tv_investment_account"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_value"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/checking_acct"
-            android:textSize="24sp" />
+            android:layout_gravity="bottom|center"
+            android:text="@string/total_amount_available_currency"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:visibility="visible" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="80dp"
-            android:paddingTop="48dp">
+    </FrameLayout>
 
-            <View
-                android:id="@+id/view"
-                android:layout_marginTop="64dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/lightGray"
-                />
-
-            <TextView
-                android:id="@+id/tv_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:paddingTop="8dp"
-                android:text="@string/currency"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_unrealized_gain_loss"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:text="@string/currency"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/tv_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:text="@string/currency"
-                android:textAlignment="viewEnd"
-                android:gravity="end" />
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom" />
 
 </LinearLayout>

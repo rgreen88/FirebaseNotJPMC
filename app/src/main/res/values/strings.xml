@@ -43,4 +43,7 @@
     <string name="checking_account">Checking Account</string>
     <string name="transactions">Transactions</string>
     <string name="market">Market</string>
+    <string name="curreny">Currency</string>
+    <string name="market_shares_amount">Market Shares Amount</string>
+    <string name="total_amount_available_currency">Total Amount Available (currency_</string>
 </resources>

@@ -27,9 +27,9 @@ public class MarketActivity extends BaseActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_market);
 
-        //binding
+        //binding views
         mGreeting = findViewById(R.id.tv_greeting);
         mCurrentDate = findViewById(R.id.tv_current_date);
         mCheckingAccount = findViewById(R.id.tv_checking_account);
@@ -39,7 +39,7 @@ public class MarketActivity extends BaseActivity{
 
         //RecyclerView LinearLayoutManager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mCheckingAccountList.setLayoutManager(layoutManager);
+        mCheckingAccountList.setLayoutManager(layoutManager);//this will crash if layout isnt set to activity_main
         mCheckingAccountList.setHasFixedSize(true);
 
         //setting adapter

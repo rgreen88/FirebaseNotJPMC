@@ -27,9 +27,9 @@ public class TransactionsActivity extends BaseActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_transactions);
 
-        //binding
+        //binding views
         mGreeting = findViewById(R.id.tv_greeting);
         mCurrentDate = findViewById(R.id.tv_current_date);
         mCheckingAccount = findViewById(R.id.tv_checking_account);

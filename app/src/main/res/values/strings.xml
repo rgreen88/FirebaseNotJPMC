@@ -37,4 +37,10 @@
     <string name="close_drawer">close drawer</string>
     <string name="total_value">Total Value</string>
     <string name="nav_welcome">Welcome to JPMC Banking App</string>
+    <string name="menu_item">Menu Item</string>
+    <string name="log_out">Log out</string>
+    <string name="sub_items">Sub items</string>
+    <string name="checking_account">Checking Account</string>
+    <string name="transactions">Transactions</string>
+    <string name="market">Market</string>
 </resources>

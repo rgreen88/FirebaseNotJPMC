@@ -1,10 +1,9 @@
 package com.example.ryne.jpmclookalikemvp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.ryne.jpmclookalikemvp.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by rynel on 1/17/2018.
@@ -25,6 +25,8 @@ public class BaseActivity extends AppCompatActivity{
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
+
+    private FirebaseAuth mAuth;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -94,30 +96,36 @@ public class BaseActivity extends AppCompatActivity{
 
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
-        Fragment fragment = null;
-        Class fragmentClass;
+//        Fragment fragment = null;
+//        Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.nav_checking_fragment:
-                fragmentClass = CheckingAccountActivity.class;
+                Intent intent = new Intent(this, CheckingAccountActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_transactions_fragment:
-                fragmentClass = TransactionsActivity.class;
+                intent = new Intent (this, TransactionsActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_market_fragment:
-                fragmentClass = MarketActivity.class;
+                intent = new Intent (this, MarketActivity.class);
+                startActivity(intent);
                 break;
+            case R.id.sign_out_button:
+                mAuth.signOut(); //will crash
             default:
-                fragmentClass = CheckingAccountActivity.class;
+                intent = new Intent(this, CheckingAccountActivity.class);
+                startActivity(intent);
         }
         try {
-            fragment = (Fragment) fragmentClass.newInstance();
+//            fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);

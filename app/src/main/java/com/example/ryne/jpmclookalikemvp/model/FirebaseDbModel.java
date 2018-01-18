@@ -33,6 +33,8 @@ public class FirebaseDbModel extends BaseActivity {
 
         getInstance();
         getCheckingAccount();
+        getTransactionsAccount();
+        getMarketingInvestments();
     }
 
     public void getInstance() {
@@ -41,7 +43,7 @@ public class FirebaseDbModel extends BaseActivity {
         // Write a message to the database...may need to space out reference objects
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         jpmcRef = database.getReference("Customer");
-        jpmcRef.setValue("Ryne Green");
+        jpmcRef.push().setValue("Ryne Green");
 
         // Read from the database
         jpmcRef.addValueEventListener(new ValueEventListener() {
@@ -49,7 +51,7 @@ public class FirebaseDbModel extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
+                String value = dataSnapshot.getValue(String.class);//hashmap to string issues
                 Log.d(TAG, "Value is: " + value);
             }
 
@@ -117,16 +119,16 @@ public class FirebaseDbModel extends BaseActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         jpmcRef = database.getReference("Marketing Investments Account");
         jpmcRef.push().setValue("$1000.00");
-        jpmcRef.push().setValue("Value");
+        jpmcRef.push().push().setValue("Value");
 
         //Market info current date
         jpmcRef = database.getReference("As of (Current Date)");
-        jpmcRef.setValue("$1000000.00 (increase symbol)"); //TextView on left (UNREALIZED GAIN/LOSS)
-        jpmcRef.setValue( "10000.00 (increase symbol)"); //TextView on left (TODAY'S CHANGE)
+        jpmcRef.push().setValue("$1000000.00 (increase symbol)"); //TextView on left (UNREALIZED GAIN/LOSS)
+        jpmcRef.push().setValue( "10000.00 (increase symbol)"); //TextView on left (TODAY'S CHANGE)
         //Three TextViews divided by the above using view: Left: Price, Center: Unrealized Gain/Loss, Right: "Value"
-        jpmcRef.setValue("10.00");                       //under Price an Equity division before info on left
-        jpmcRef.setValue("10000.00 (decrease symbol)");
-        jpmcRef.setValue("$100000.00");
+        jpmcRef.push().setValue("10.00");                       //under Price an Equity division before info on left
+        jpmcRef.push().setValue("10000.00 (decrease symbol)");
+        jpmcRef.push().setValue("$100000.00");
 
         // Read from the database
         jpmcRef.addValueEventListener(new ValueEventListener() {

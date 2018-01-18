@@ -16,7 +16,7 @@ public class MainPresenter implements MainContract.Presenter{
     //constructor to bind mView
     public MainPresenter (MainContract.View mView){
         this.mView = mView; //binding relationship from contract to presenter
-        firebaseDbModel = new FirebaseDbModel(mView);
+        firebaseDbModel = new FirebaseDbModel();
     }
 
     @Override

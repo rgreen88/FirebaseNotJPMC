@@ -1,7 +1,9 @@
 package com.example.ryne.jpmclookalikemvp.model;
 
+import android.os.Bundle;
 import android.util.Log;
 
+import com.example.ryne.jpmclookalikemvp.R;
 import com.example.ryne.jpmclookalikemvp.view.BaseActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +23,15 @@ public class FirebaseDbModel extends BaseActivity {
 
     public FirebaseDbModel() {
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.dummy_layout);
+
+        getInstance();
     }
 
     public void getInstance() {

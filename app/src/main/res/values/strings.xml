@@ -50,4 +50,5 @@
     <string name="populate_fb_db">Firebase Database Populated! Use nav drawer to select an Activity.</string>
     <string name="dummy_transactions">Dummy Transactions</string>
     <string name="dummy_market_investments">Dummy_market_investments</string>
+    <string name="unrealized_gains_losses">UNREALIZED GAINS/LOSSES</string>
 </resources>

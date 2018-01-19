@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.ryne.jpmclookalikemvp.R;
+import com.example.ryne.jpmclookalikemvp.model.util.CipherHandler;
 import com.example.ryne.jpmclookalikemvp.view.BaseActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +21,7 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 public class FirebaseDbModel extends BaseActivity {
 
     private DatabaseReference jpmcRef; //private reference for adding/using database data
+    CipherHandler cipherHandler;
 
     public FirebaseDbModel() {
 

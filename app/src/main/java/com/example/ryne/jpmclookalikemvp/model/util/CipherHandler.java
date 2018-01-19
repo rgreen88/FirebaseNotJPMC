@@ -6,11 +6,9 @@ import android.util.Base64;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.Provider;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.CipherSpi;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
@@ -50,6 +48,7 @@ public class CipherHandler {
     public String decrypt(String data, Key key) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException{
 
         //initializing decrypt mode for key
+        cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] encryptedData = Base64.decode(data, Base64.DEFAULT);
         byte[] decryptedData = cipher.doFinal(encryptedData);
 

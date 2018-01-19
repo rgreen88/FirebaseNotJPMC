@@ -16,13 +16,15 @@ public class MarketActivity extends BaseActivity{
     //TextViews
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
 
-    //creating RecyclerViewAdapter variable called mAdapter
-    RecyclerViewAdapter mAdapter;
+    //creating CheckingAccountAdapter variable called mAdapter
+    MarketAdapter mAdapter;
 
     //creating RecyclerView variable called mWeatherList
     private RecyclerView mCheckingAccountList;
 
     private static final int NUM_LIST_ITEMS = 50;
+
+    //TODO: rv adapter containing a separate card view setup for MarketActivity
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,11 @@ public class MarketActivity extends BaseActivity{
 
         //RecyclerView LinearLayoutManager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mCheckingAccountList.setLayoutManager(layoutManager);//this will crash if layout isnt set to activity_main
+        mCheckingAccountList.setLayoutManager(layoutManager);
         mCheckingAccountList.setHasFixedSize(true);
 
         //setting adapter
-        mAdapter = new RecyclerViewAdapter(NUM_LIST_ITEMS, this);
+        mAdapter = new MarketAdapter(NUM_LIST_ITEMS, this);
         mCheckingAccountList.setAdapter(mAdapter);
     }
 }

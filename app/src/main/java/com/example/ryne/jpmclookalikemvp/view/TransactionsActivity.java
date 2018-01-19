@@ -13,11 +13,13 @@ import com.example.ryne.jpmclookalikemvp.R;
 
 public class TransactionsActivity extends BaseActivity{
 
+    //TODO: rv adapter containing a separate card view setup for TransactionActivity
+
     //TextViews
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
 
-    //creating RecyclerViewAdapter variable called mAdapter
-    RecyclerViewAdapter mAdapter;
+    //creating CheckingAccountAdapter variable called mAdapter
+    TransactionsAdapter mAdapter;
 
     //creating RecyclerView variable called mWeatherList
     private RecyclerView mCheckingAccountList;
@@ -43,7 +45,7 @@ public class TransactionsActivity extends BaseActivity{
         mCheckingAccountList.setHasFixedSize(true);
 
         //setting adapter
-        mAdapter = new RecyclerViewAdapter(NUM_LIST_ITEMS, this);
+        mAdapter = new TransactionsAdapter(NUM_LIST_ITEMS, this);
         mCheckingAccountList.setAdapter(mAdapter);
     }
 }

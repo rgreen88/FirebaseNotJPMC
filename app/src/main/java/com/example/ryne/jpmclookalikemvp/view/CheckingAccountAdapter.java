@@ -10,24 +10,21 @@ import android.widget.TextView;
 
 import com.example.ryne.jpmclookalikemvp.R;
 
-import java.util.ArrayList;
-
 /**
  * Created by rynel on 1/16/2018.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.CheckingBalanceHolder>{
+public class CheckingAccountAdapter extends RecyclerView.Adapter<CheckingAccountAdapter.CheckingBalanceHolder>{
 
-    private static final String TAG = RecyclerViewAdapter.class.getSimpleName();
+    private static final String TAG = CheckingAccountAdapter.class.getSimpleName();
 
     private int mCheckingBalanceItem;
-    ArrayList<CheckingBalanceHolder> checkingBalanceHolders = new ArrayList<>();
     Context context;
 
 
-    public RecyclerViewAdapter(int numOfItems, Context context){
+    public CheckingAccountAdapter(int numOfItems, Context context){
         mCheckingBalanceItem = numOfItems;
-//        this.checkingBalanceHolders = checkingBalanceHolders;
+
         this.context = context;
     }
 

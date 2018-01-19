@@ -54,4 +54,9 @@
     <string name="price">Price</string>
     <string name="today_s_change">TODAY\'S CHANGE</string>
     <string name="equity">Equity</string>
+    <string name="shares">Shares</string>
+    <string name="dummy_market_company">company</string>
+    <string name="cv_unrealized_gain_loss">Unrealized Gain/Loss</string>
+    <string name="transaction_amount">transaction amount</string>
+    <string name="_500">500</string>
 </resources>

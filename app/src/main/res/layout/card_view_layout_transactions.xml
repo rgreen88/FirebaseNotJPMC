@@ -16,68 +16,47 @@
         card_view:contentPadding="@dimen/default_padding"
         tools:targetApi="lollipop">
 
-
-        <TextView
-            android:id="@+id/tv_pay_bills"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="end"
-            android:layout_marginTop="150dp"
-            android:text="@string/dummy_business_transaction"
-            android:textAlignment="textEnd"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_checking_account"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/dummy_transactions"
-            android:textSize="24sp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="80dp"
-            android:paddingTop="48dp">
-
-            <View
-                android:id="@+id/view"
-                android:layout_marginTop="64dp"
+            <TextView
+                android:id="@+id/tv_checking_account"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/lightGray"
-                />
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/dummy_market_company"
+                android:textSize="16sp" />
+
 
             <TextView
                 android:id="@+id/tv_currency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
+                android:layout_margin="24dp"
                 android:paddingTop="8dp"
-                android:text="transaction amount"
-                android:textSize="18sp" />
+                android:text="@string/transaction"
+                android:textSize="16sp" />
+
+
 
             <TextView
                 android:id="@+id/tv_available_balance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:gravity="end"
-                android:text="500"
-                android:textAlignment="viewEnd" />
+                android:textAlignment="textEnd"
+                android:paddingTop="8dp"
+                android:layout_margin="24dp"
+                android:layout_gravity="center|end"
+                android:text="@string/price"
+                android:textSize="16sp"/>
 
-        </RelativeLayout>
+
+        </FrameLayout>
+
 
     </android.support.v7.widget.CardView>
 

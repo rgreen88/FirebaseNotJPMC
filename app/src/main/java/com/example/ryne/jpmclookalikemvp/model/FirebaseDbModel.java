@@ -74,7 +74,9 @@ public class FirebaseDbModel extends BaseActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    private void initEncryptor() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException, NoSuchPaddingException, NoSuchProviderException, InvalidAlgorithmParameterException, UnrecoverableKeyException {
+    private void initEncryptor() throws CertificateException, NoSuchAlgorithmException,
+            KeyStoreException, IOException, NoSuchPaddingException, NoSuchProviderException,
+            InvalidAlgorithmParameterException, UnrecoverableKeyException {
 
         //initialize wrapper classes
         keyStoreHandler = new KeyStoreHandler(this);

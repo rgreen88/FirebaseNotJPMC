@@ -115,9 +115,6 @@ public class BaseActivity extends AppCompatActivity{
             case R.id.database_populate_dummy__data:
                 intent = new Intent(this, FirebaseDbModel.class);
                 startActivity(intent);
-//            default:
-//                intent = new Intent(this, CheckingAccountActivity.class);
-//                startActivity(intent);
         }
         try {
 //            fragment = (Fragment) fragmentClass.newInstance();
@@ -125,16 +122,11 @@ public class BaseActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
-        // Insert the fragment by replacing any existing fragment
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
         // Set action bar title
         setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-//        mDrawer.closeDrawers();
     }
 
 //    //in case some change such as screen rotation occurs
@@ -154,9 +146,6 @@ public class BaseActivity extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 }

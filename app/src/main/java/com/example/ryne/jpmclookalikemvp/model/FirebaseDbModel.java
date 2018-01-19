@@ -121,7 +121,7 @@ public class FirebaseDbModel extends BaseActivity {
                 //TODO: Decrypt
                 String value = dataSnapshot.getValue(String.class);
                 try {
-                    value = cipherHandler.decrypt(value, masterKey.getPublic());
+                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
                 } catch (InvalidKeyException e) {
                     e.printStackTrace();
                 } catch (BadPaddingException e) {
@@ -157,6 +157,15 @@ public class FirebaseDbModel extends BaseActivity {
                 // whenever data at this location is updated.
                 //TODO: Decrypt
                 String value = dataSnapshot.getValue(String.class);
+                try {
+                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                } catch (BadPaddingException e) {
+                    e.printStackTrace();
+                } catch (IllegalBlockSizeException e) {
+                    e.printStackTrace();
+                }
                 Log.d(TAG, "Value is: " + value);
             }
 
@@ -184,6 +193,15 @@ public class FirebaseDbModel extends BaseActivity {
                 // whenever data at this location is updated.
                 //TODO: Decrypt
                 String value = dataSnapshot.getValue(String.class);
+                try {
+                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                } catch (BadPaddingException e) {
+                    e.printStackTrace();
+                } catch (IllegalBlockSizeException e) {
+                    e.printStackTrace();
+                }
                 Log.d(TAG, "Value is: " + value);
             }
 
@@ -221,6 +239,15 @@ public class FirebaseDbModel extends BaseActivity {
                 // whenever data at this location is updated.
                 //TODO: Decrypt
                 String value = dataSnapshot.getValue(String.class);
+                try {
+                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                } catch (BadPaddingException e) {
+                    e.printStackTrace();
+                } catch (IllegalBlockSizeException e) {
+                    e.printStackTrace();
+                }
                 Log.d(TAG, "Value is: " + value);
             }
 

@@ -1,7 +1,9 @@
 package com.example.ryne.jpmclookalikemvp.model;
 
 import android.app.KeyguardManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import com.example.ryne.jpmclookalikemvp.R;
@@ -14,7 +16,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.KeyPair;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
+
+import javax.crypto.NoSuchPaddingException;
 
 /**
  * Created by Ryne on 1/11/2018.
@@ -37,17 +48,52 @@ public class FirebaseDbModel extends BaseActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.dummy_layout);
 
+        try {
+            //init cipher, keystore, keys for encryption and decryption
+            initEncryptor();
+
+        } catch (CertificateException
+                | NoSuchAlgorithmException
+                | KeyStoreException
+                | NoSuchPaddingException
+                | IOException
+                | NoSuchProviderException
+                | InvalidAlgorithmParameterException
+                | UnrecoverableKeyException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    private void initEncryptor() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException, NoSuchPaddingException, NoSuchProviderException, InvalidAlgorithmParameterException, UnrecoverableKeyException {
+
+        //initialize wrapper classes
+        keyStoreHandler = new KeyStoreHandler(this);
+        cipherHandler= new CipherHandler(TRANSFORMATION_ASYMMETRIC);
+
+        //create asymmetric key pair
+        keyStoreHandler.createAKSKeyPair(alias);
+
+        //get asymmetric key pair
+        masterKey = keyStoreHandler.getAKSAsymmetricKeyPair(alias);
+
         getDbInstance();
         getCheckingAccount();
         getTransactionsAccount();
         getMarketingInvestments();
     }
+
+
+
 
     public void getDbInstance(){
 

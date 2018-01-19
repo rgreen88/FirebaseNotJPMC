@@ -25,8 +25,16 @@ public class MainPresenter implements MainContract.Presenter{
     }
 
     @Override
-    public void getInstance() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
-        firebaseDbModel.getDbInstance();
+    public void getInstance() {
+        try {
+            firebaseDbModel.getDbInstance();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
         mView.showInstance();
     }
 }

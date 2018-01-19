@@ -61,8 +61,16 @@ public class FirebaseDbModel extends BaseActivity {
         try {
             //init cipher, keystore, keys for encryption and decryption
             initEncryptor();
+            getDbInstance();
+            getCheckingAccount();
+            getTransactionsAccount();
+            getMarketingInvestments();
 
+            //catch exceptions for all crypto messages
         } catch (CertificateException
+                | InvalidKeyException
+                | IllegalBlockSizeException
+                | BadPaddingException
                 | NoSuchAlgorithmException
                 | KeyStoreException
                 | NoSuchPaddingException
@@ -73,16 +81,6 @@ public class FirebaseDbModel extends BaseActivity {
             e.printStackTrace();
         }
 
-        try {
-            getDbInstance();
-        } catch (BadPaddingException
-                | InvalidKeyException
-                | IllegalBlockSizeException e) {
-            e.printStackTrace();
-        }
-        getCheckingAccount();
-        getTransactionsAccount();
-        getMarketingInvestments();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -111,8 +109,8 @@ public class FirebaseDbModel extends BaseActivity {
         // Write a message to the database...may need to space out reference objects
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //TODO: Cipher
-        jpmcRef = database.getReference(cipherHandler.encrypt("Customer", masterKey.getPublic()));
-        jpmcRef.setValue("Ryne Green");
+        jpmcRef = database.getReference("Customer");
+        jpmcRef.setValue(cipherHandler.encrypt("Ryne Green", masterKey.getPublic()));
 
         // Read from the database
         jpmcRef.addValueEventListener(new ValueEventListener() {
@@ -122,6 +120,15 @@ public class FirebaseDbModel extends BaseActivity {
                 // whenever data at this location is updated.
                 //TODO: Decrypt
                 String value = dataSnapshot.getValue(String.class);
+                try {
+                    value = cipherHandler.decrypt(value, masterKey.getPublic());
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                } catch (BadPaddingException e) {
+                    e.printStackTrace();
+                } catch (IllegalBlockSizeException e) {
+                    e.printStackTrace();
+                }
                 Log.d(TAG, "Value is: " + value);
             }
 
@@ -134,13 +141,13 @@ public class FirebaseDbModel extends BaseActivity {
     }
 
     //explicitly writing to database only
-    public void getCheckingAccount (){
+    public void getCheckingAccount () throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
         //checking info
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //TODO: Encrypt
         jpmcRef = database.getReference("Checking Account");
-        jpmcRef.setValue("Balance: 1000.00");
-        jpmcRef.setValue("Avalailable Credit: 1000.00");
+        jpmcRef.setValue(cipherHandler.encrypt("Balance: 1000.00", masterKey.getPublic()));
+        jpmcRef.setValue(cipherHandler.encrypt("Avalailable Credit: 1000.00", masterKey.getPublic()));
 
         // Read from the database
         jpmcRef.addValueEventListener(new ValueEventListener() {
@@ -161,13 +168,13 @@ public class FirebaseDbModel extends BaseActivity {
         });
     }
 
-    public void getTransactionsAccount (){
+    public void getTransactionsAccount () throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
         //Transactions info
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //TODO: Encrypt
         jpmcRef = database.getReference("Transactions");
-        jpmcRef.setValue("Billed: 0.00");
-        jpmcRef.setValue("Avalailable Credit: 1000.00");
+        jpmcRef.setValue(cipherHandler.encrypt("Billed: 0.00", masterKey.getPublic()));
+        jpmcRef.setValue(cipherHandler.encrypt("Avalailable Credit: 1000.00", masterKey.getPublic()));
 
         // Read from the database
         jpmcRef.addValueEventListener(new ValueEventListener() {
@@ -188,22 +195,22 @@ public class FirebaseDbModel extends BaseActivity {
         });
     }
 
-    public void getMarketingInvestments (){
+    public void getMarketingInvestments () throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
         //Market info
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //TODO: Encrypt
         jpmcRef = database.getReference("Marketing Investments Account");
-        jpmcRef.push().setValue("Value");
-        jpmcRef.push().push().setValue("$1000.00");
+        jpmcRef.push().setValue(cipherHandler.encrypt("Value", masterKey.getPublic()));
+        jpmcRef.push().push().setValue(cipherHandler.encrypt("$1000.00", masterKey.getPublic()));
 
 
         //Market info current date
         //TODO: Encrypt
         jpmcRef = database.getReference("As of (Current Date)");
-        jpmcRef.push().setValue("$1000000.00 (increase symbol)"); //TextView on left (UNREALIZED GAIN/LOSS)
-        jpmcRef.push().setValue( "10000.00 (increase symbol)"); //TextView on left (TODAY'S CHANGE)
+        jpmcRef.push().setValue(cipherHandler.encrypt("$1000000.00 (increase symbol)",masterKey.getPublic())); //TextView on left (UNREALIZED GAIN/LOSS)
+        jpmcRef.push().setValue(cipherHandler.encrypt( "10000.00 (increase symbol)", masterKey.getPublic())); //TextView on left (TODAY'S CHANGE)
         //Three TextViews divided by the above using view: Left: Price, Center: Unrealized Gain/Loss, Right: "Value"
-        jpmcRef.setValue("10.00");                       //under Price an Equity division before info on left
+        jpmcRef.setValue(cipherHandler.encrypt("10.00", masterKey.getPublic()));                       //under Price an Equity division before info on left
 
 
         // Read from the database

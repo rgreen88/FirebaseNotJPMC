@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -25,6 +26,8 @@ import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
@@ -70,7 +73,16 @@ public class FirebaseDbModel extends BaseActivity {
             e.printStackTrace();
         }
 
-
+        try {
+            getDbInstance();
+        } catch (BadPaddingException
+                | InvalidKeyException
+                | IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
+        getCheckingAccount();
+        getTransactionsAccount();
+        getMarketingInvestments();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -88,22 +100,18 @@ public class FirebaseDbModel extends BaseActivity {
         //get asymmetric key pair
         masterKey = keyStoreHandler.getAKSAsymmetricKeyPair(alias);
 
-        getDbInstance();
-        getCheckingAccount();
-        getTransactionsAccount();
-        getMarketingInvestments();
     }
 
 
 
 
-    public void getDbInstance(){
+    public void getDbInstance() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
 
 
         // Write a message to the database...may need to space out reference objects
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //TODO: Cipher
-        jpmcRef = database.getReference("Customer");
+        jpmcRef = database.getReference(cipherHandler.encrypt("Customer", masterKey.getPublic()));
         jpmcRef.setValue("Ryne Green");
 
         // Read from the database
@@ -192,8 +200,8 @@ public class FirebaseDbModel extends BaseActivity {
         //Market info current date
         //TODO: Encrypt
         jpmcRef = database.getReference("As of (Current Date)");
-        jpmcRef.setValue("$1000000.00 (increase symbol)"); //TextView on left (UNREALIZED GAIN/LOSS)
-        jpmcRef.setValue( "10000.00 (increase symbol)"); //TextView on left (TODAY'S CHANGE)
+        jpmcRef.push().setValue("$1000000.00 (increase symbol)"); //TextView on left (UNREALIZED GAIN/LOSS)
+        jpmcRef.push().setValue( "10000.00 (increase symbol)"); //TextView on left (TODAY'S CHANGE)
         //Three TextViews divided by the above using view: Left: Price, Center: Unrealized Gain/Loss, Right: "Value"
         jpmcRef.setValue("10.00");                       //under Price an Equity division before info on left
 

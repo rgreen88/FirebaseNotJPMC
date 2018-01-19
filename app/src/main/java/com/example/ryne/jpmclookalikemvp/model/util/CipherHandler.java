@@ -39,9 +39,7 @@ public class CipherHandler {
         //creating bytes array and encrypting data using .getBytes method
         byte[] bytes = cipher.doFinal(data.getBytes());
 
-        //returning encryption data using Base64 default
         return Base64.encodeToString(bytes, Base64.DEFAULT);
-
     }
 
     //decrypt method

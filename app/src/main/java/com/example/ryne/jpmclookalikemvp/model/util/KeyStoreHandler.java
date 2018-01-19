@@ -35,7 +35,7 @@ public class KeyStoreHandler {
     private Context context;
 
     //Final to TAG, KEYSTORE_PROVIDER, ALGORITHM
-    private static final String TAG = "KeyStoreWrapTag";
+    private static final String TAG = "KeyStoreHandler";
     private static final String KEYSTORE_PROVIDER = "AndroidKeyStore";
     public static final String CURRENT_ALGORITHM = "RSA";
 

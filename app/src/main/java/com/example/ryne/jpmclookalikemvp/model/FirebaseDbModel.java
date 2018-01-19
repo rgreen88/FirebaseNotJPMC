@@ -12,6 +12,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.InvalidKeyException;
+import java.security.Key;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
 /**
@@ -21,7 +27,8 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 public class FirebaseDbModel extends BaseActivity {
 
     private DatabaseReference jpmcRef; //private reference for adding/using database data
-    CipherHandler cipherHandler;
+    private CipherHandler cipherHandler;
+    private Key key;
 
     public FirebaseDbModel() {
 
@@ -33,20 +40,28 @@ public class FirebaseDbModel extends BaseActivity {
 
         setContentView(R.layout.dummy_layout);
 
-        getInstance();
+        try {
+            getInstance();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
         getCheckingAccount();
         getTransactionsAccount();
         getMarketingInvestments();
     }
 
-    public void getInstance() {
+    public void getInstance() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
 
 
         // Write a message to the database...may need to space out reference objects
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //TODO: Cipher
-        jpmcRef = database.getReference("Customer");
-        jpmcRef.setValue("Ryne Green");
+        jpmcRef = database.getReference(cipherHandler.encrypt("Customer", key));
+        jpmcRef.setValue(cipherHandler.encrypt("Ryne Green", key));
 
         // Read from the database
         jpmcRef.addValueEventListener(new ValueEventListener() {
@@ -54,7 +69,16 @@ public class FirebaseDbModel extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);//hashmap to string issues
+                String value = null;//hashmap to string issues
+                try {
+                    value = cipherHandler.decrypt(dataSnapshot.getValue(String.class), key);
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                } catch (BadPaddingException e) {
+                    e.printStackTrace();
+                } catch (IllegalBlockSizeException e) {
+                    e.printStackTrace();
+                }
                 Log.d(TAG, "Value is: " + value);
             }
 

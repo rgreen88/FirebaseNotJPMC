@@ -1,10 +1,12 @@
 package com.example.ryne.jpmclookalikemvp.model;
 
+import android.app.KeyguardManager;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.example.ryne.jpmclookalikemvp.R;
 import com.example.ryne.jpmclookalikemvp.model.util.CipherHandler;
+import com.example.ryne.jpmclookalikemvp.model.util.KeyStoreHandler;
 import com.example.ryne.jpmclookalikemvp.view.BaseActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,13 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.security.InvalidKeyException;
-import java.security.Key;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-
-import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
+import java.security.KeyPair;
 
 /**
  * Created by Ryne on 1/11/2018.
@@ -28,7 +24,14 @@ public class FirebaseDbModel extends BaseActivity {
 
     private DatabaseReference jpmcRef; //private reference for adding/using database data
     private CipherHandler cipherHandler;
-    private Key key;
+    private static final String TAG = "MainActivityTag";
+    private static final java.lang.String TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding";
+    private String alias = "master_key";
+
+    private KeyguardManager keyguardManager;
+    private KeyStoreHandler keyStoreHandler;
+    private KeyPair masterKey;
+    private String encryptedData;
 
     public FirebaseDbModel() {
 
@@ -40,28 +43,20 @@ public class FirebaseDbModel extends BaseActivity {
 
         setContentView(R.layout.dummy_layout);
 
-        try {
-            getInstance();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        }
+        getDbInstance();
         getCheckingAccount();
         getTransactionsAccount();
         getMarketingInvestments();
     }
 
-    public void getInstance() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
+    public void getDbInstance(){
 
 
         // Write a message to the database...may need to space out reference objects
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //TODO: Cipher
-        jpmcRef = database.getReference(cipherHandler.encrypt("Customer", key));
-        jpmcRef.setValue(cipherHandler.encrypt("Ryne Green", key));
+        jpmcRef = database.getReference("Customer");
+        jpmcRef.setValue("Ryne Green");
 
         // Read from the database
         jpmcRef.addValueEventListener(new ValueEventListener() {
@@ -69,16 +64,8 @@ public class FirebaseDbModel extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = null;//hashmap to string issues
-                try {
-                    value = cipherHandler.decrypt(dataSnapshot.getValue(String.class), key);
-                } catch (InvalidKeyException e) {
-                    e.printStackTrace();
-                } catch (BadPaddingException e) {
-                    e.printStackTrace();
-                } catch (IllegalBlockSizeException e) {
-                    e.printStackTrace();
-                }
+                //TODO: Decrypt
+                String value = dataSnapshot.getValue(String.class);
                 Log.d(TAG, "Value is: " + value);
             }
 

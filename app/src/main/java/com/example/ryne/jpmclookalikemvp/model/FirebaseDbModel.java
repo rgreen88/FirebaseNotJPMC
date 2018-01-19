@@ -94,7 +94,7 @@ public class FirebaseDbModel extends BaseActivity {
     public void getCheckingAccount (){
         //checking info
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //TODO: Cipher
+        //TODO: Encrypt
         jpmcRef = database.getReference("Checking Account");
         jpmcRef.setValue("Balance: 1000.00");
         jpmcRef.setValue("Avalailable Credit: 1000.00");
@@ -105,6 +105,7 @@ public class FirebaseDbModel extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
+                //TODO: Decrypt
                 String value = dataSnapshot.getValue(String.class);
                 Log.d(TAG, "Value is: " + value);
             }
@@ -120,7 +121,7 @@ public class FirebaseDbModel extends BaseActivity {
     public void getTransactionsAccount (){
         //Transactions info
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //TODO: Cipher
+        //TODO: Encrypt
         jpmcRef = database.getReference("Transactions");
         jpmcRef.setValue("Billed: 0.00");
         jpmcRef.setValue("Avalailable Credit: 1000.00");
@@ -131,6 +132,7 @@ public class FirebaseDbModel extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
+                //TODO: Decrypt
                 String value = dataSnapshot.getValue(String.class);
                 Log.d(TAG, "Value is: " + value);
             }
@@ -146,14 +148,14 @@ public class FirebaseDbModel extends BaseActivity {
     public void getMarketingInvestments (){
         //Market info
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //TODO: Cipher
+        //TODO: Encrypt
         jpmcRef = database.getReference("Marketing Investments Account");
         jpmcRef.push().setValue("Value");
         jpmcRef.push().push().setValue("$1000.00");
 
 
         //Market info current date
-        //TODO: Cipher
+        //TODO: Encrypt
         jpmcRef = database.getReference("As of (Current Date)");
         jpmcRef.setValue("$1000000.00 (increase symbol)"); //TextView on left (UNREALIZED GAIN/LOSS)
         jpmcRef.setValue( "10000.00 (increase symbol)"); //TextView on left (TODAY'S CHANGE)
@@ -167,7 +169,8 @@ public class FirebaseDbModel extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class); //com.google.firebase.database.DatabaseException: Failed to convert value of type java.util.HashMap to String
+                //TODO: Decrypt
+                String value = dataSnapshot.getValue(String.class);
                 Log.d(TAG, "Value is: " + value);
             }
 

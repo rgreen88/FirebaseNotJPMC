@@ -51,4 +51,7 @@
     <string name="dummy_transactions">Dummy Transactions</string>
     <string name="dummy_market_investments">Dummy_market_investments</string>
     <string name="unrealized_gains_losses">UNREALIZED GAINS/LOSSES</string>
+    <string name="price">Price</string>
+    <string name="today_s_change">TODAY\'S CHANGE</string>
+    <string name="equity">Equity</string>
 </resources>

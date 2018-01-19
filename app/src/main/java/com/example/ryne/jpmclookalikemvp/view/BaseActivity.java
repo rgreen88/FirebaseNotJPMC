@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.ryne.jpmclookalikemvp.R;
+import com.example.ryne.jpmclookalikemvp.model.FirebaseDbModel;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -111,8 +112,9 @@ public class BaseActivity extends AppCompatActivity{
                 intent = new Intent (this, MarketActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.sign_out_button:
-                mAuth.signOut(); //will crash
+            case R.id.database_populate_dummy__data:
+                intent = new Intent(this, FirebaseDbModel.class);
+                startActivity(intent);
 //            default:
 //                intent = new Intent(this, CheckingAccountActivity.class);
 //                startActivity(intent);

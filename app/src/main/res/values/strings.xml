@@ -46,4 +46,6 @@
     <string name="curreny">Currency</string>
     <string name="market_shares_amount">Market Shares Amount</string>
     <string name="total_amount_available_currency">Total Amount Available (currency_</string>
+    <string name="populate_database">Populate database</string>
+    <string name="populate_fb_db">Firebase Database Populated! Use nav drawer to select an Activity.</string>
 </resources>

@@ -18,14 +18,18 @@
             android:icon="@drawable/ic_face_black_24dp"
             android:title="@string/market"
             android:onClick="selectDrawerItem"/>
+
+
     </group>
 
     <item android:title="@string/sub_items">
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/database_populate_dummy__data"
                     android:icon="@drawable/ic_face_black_24dp"
-                    android:title="@string/log_out" />
+                    android:title="@string/populate_database"
+                    android:onClick="selectDrawerItem"/>
             </group>
         </menu>
     </item>

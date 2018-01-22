@@ -14,7 +14,7 @@ import com.example.ryne.jpmclookalikemvp.R;
  * Created by rynel on 1/16/2018.
  */
 
-public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.CheckingBalanceHolder>{
+public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.TransactionsHolder>{
 
     private static final String TAG = TransactionsAdapter.class.getSimpleName();
 
@@ -29,20 +29,20 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     }
 
     @Override
-    public CheckingBalanceHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public TransactionsHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.card_view_layout_transactions;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        CheckingBalanceHolder viewHolder = new CheckingBalanceHolder(view);
+        TransactionsHolder viewHolder = new TransactionsHolder(view);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(CheckingBalanceHolder holder, int position) {
+    public void onBindViewHolder(TransactionsHolder holder, int position) {
 
         Log.d(TAG, "#" + position); //check position
         holder.bind(position);
@@ -54,13 +54,13 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         return mCheckingBalanceItem;
     }
 
-    class CheckingBalanceHolder extends RecyclerView.ViewHolder{
+    class TransactionsHolder extends RecyclerView.ViewHolder{
 
         //display position in list using getItemCount() - 1
         TextView listCheckingBalanceView;
 
         //constructor for ViewHolder with int reference to weather condition
-        public CheckingBalanceHolder(View itemView){
+        public TransactionsHolder(View itemView){
             super(itemView);
 
             listCheckingBalanceView = itemView.findViewById(R.id.tv_checking_account);

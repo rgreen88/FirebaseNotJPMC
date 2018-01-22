@@ -130,7 +130,7 @@ public class TransactionsActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String customerName = dataSnapshot.getValue(String.class);
                 try {
-                    customerName = cipherHandler.decrypt(customerName, masterKey.getPublic());
+                    customerName = cipherHandler.decrypt(customerName, masterKey.getPrivate());
                 } catch (InvalidKeyException e) {
                     e.printStackTrace();
                 } catch (BadPaddingException e) {

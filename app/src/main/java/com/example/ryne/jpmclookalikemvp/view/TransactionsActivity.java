@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -26,6 +27,8 @@ import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
@@ -82,26 +85,22 @@ public class TransactionsActivity extends BaseActivity {
         mCheckingAccountList.setAdapter(mAdapter);
 
         try {
+            //init cipher, keystore, keys for encryption and decryption
             initEncryptor();
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchProviderException e) {
-            e.printStackTrace();
-        } catch (InvalidAlgorithmParameterException e) {
-            e.printStackTrace();
-        } catch (UnrecoverableKeyException e) {
+            getCustomerName();
+
+            //catch exceptions for all crypto messages
+        } catch (CertificateException
+                | NoSuchAlgorithmException
+                | KeyStoreException
+                | NoSuchPaddingException
+                | IOException
+                | NoSuchProviderException
+                | InvalidAlgorithmParameterException
+                | UnrecoverableKeyException e) {
             e.printStackTrace();
         }
 
-        getCustomerName();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -130,7 +129,15 @@ public class TransactionsActivity extends BaseActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String customerName = dataSnapshot.getValue(String.class);
-//                customerName = cipherHandler.decrypt(customerName, masterKey.getPrivate());
+                try {
+                    customerName = cipherHandler.decrypt(customerName, masterKey.getPublic());
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                } catch (BadPaddingException e) {
+                    e.printStackTrace();
+                } catch (IllegalBlockSizeException e) {
+                    e.printStackTrace();
+                }
                 Log.d(TAG, "onDataChange: " + customerName);
 //                 mCheckingAccount.setText(customerName);   returning null even though log picks up encrypted values
             }

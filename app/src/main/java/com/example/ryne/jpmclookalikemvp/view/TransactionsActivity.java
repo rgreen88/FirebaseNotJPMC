@@ -38,7 +38,7 @@ import javax.crypto.NoSuchPaddingException;
 public class TransactionsActivity extends BaseActivity {
 
     //TextViews
-    TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
+    TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills, mPrice, mValue;
 
     //CipherHandler for decrypt
     CipherHandler cipherHandler;
@@ -49,7 +49,7 @@ public class TransactionsActivity extends BaseActivity {
     private KeyPair masterKey;
 
     //Database Ref object
-    DatabaseReference mCustomer;
+    DatabaseReference mCustomer, dbPrice;
 
     //creating CheckingAccountAdapter variable called mAdapter
     TransactionsAdapter mAdapter;
@@ -68,10 +68,13 @@ public class TransactionsActivity extends BaseActivity {
         //binding views
         mGreeting = findViewById(R.id.tv_greeting);
         mCurrentDate = findViewById(R.id.tv_current_date);
-        mCheckingAccount = findViewById(R.id.tv_checking_account);
+        mCheckingAccount = findViewById(R.id.tv_checking_account); //position counter rv
         mCurrency = findViewById(R.id.tv_currency);
         mCheckingAccountList = findViewById(R.id.rv_recycler_view);
         mPayBills = findViewById(R.id.tv_pay_bills);
+        mPrice = findViewById(R.id.tv_amount);
+        mValue = findViewById(R.id.tv_value);
+
 
         //RecyclerView LinearLayoutManager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -86,6 +89,7 @@ public class TransactionsActivity extends BaseActivity {
             //init cipher, keystore, keys for encryption and decryption
             initEncryptor();
             getCustomerName();
+            getPrice();
 
             //catch exceptions for all crypto messages
         } catch (CertificateException
@@ -127,8 +131,30 @@ public class TransactionsActivity extends BaseActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String customerName = dataSnapshot.getValue(String.class);
+//                    customerName = cipherHandler.decrypt(customerName, masterKey.getPrivate()); //System error as warning
+                Log.d(TAG, "onDataChange: " + customerName);
+//                 mCheckingAccount.setText(customerName);   returning null even though log picks up encrypted values
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    public void getPrice() {
+        //getting reference
+        dbPrice = FirebaseDatabase.getInstance().getReference("Transactions");
+
+        //getting name from database
+        dbPrice.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String transactionPrice = dataSnapshot.getValue(String.class);
                 try {
-                    customerName = cipherHandler.decrypt(customerName, masterKey.getPrivate()); //System error as warning
+                    transactionPrice = cipherHandler.decrypt(transactionPrice, masterKey.getPrivate()); //System error as warning
                 } catch (InvalidKeyException e) {
                     e.printStackTrace();
                 } catch (BadPaddingException e) {
@@ -136,8 +162,8 @@ public class TransactionsActivity extends BaseActivity {
                 } catch (IllegalBlockSizeException e) {
                     e.printStackTrace();
                 }
-                Log.d(TAG, "onDataChange: " + customerName);
-//                 mCheckingAccount.setText(customerName);   returning null even though log picks up encrypted values
+                Log.d(TAG, "onDataChange: " + transactionPrice);
+                 mValue.setText(transactionPrice);   //returning null even though log picks up encrypted values
             }
 
             @Override

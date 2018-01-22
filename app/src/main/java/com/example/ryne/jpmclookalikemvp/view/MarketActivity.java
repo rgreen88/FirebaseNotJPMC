@@ -34,7 +34,7 @@ public class MarketActivity extends BaseActivity{
         //binding views
         mGreeting = findViewById(R.id.tv_greeting);
         mCurrentDate = findViewById(R.id.tv_current_date);
-        mCheckingAccount = findViewById(R.id.tv_checking_account);
+        mCheckingAccount = findViewById(R.id.tv_checking_account); //position counter rv
         mCurrency = findViewById(R.id.tv_currency);
         mCheckingAccountList = findViewById(R.id.rv_recycler_view);
         mPayBills = findViewById(R.id.tv_pay_bills);

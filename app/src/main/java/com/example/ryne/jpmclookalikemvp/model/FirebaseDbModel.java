@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.ryne.jpmclookalikemvp.R;
 import com.example.ryne.jpmclookalikemvp.model.util.CipherHandler;
@@ -43,6 +44,8 @@ public class FirebaseDbModel extends BaseActivity {
     private KeyStoreHandler keyStoreHandler;
     private KeyPair masterKey;
 
+    TextView tvDbCustomer;
+
     public FirebaseDbModel() {
 
     }
@@ -54,6 +57,8 @@ public class FirebaseDbModel extends BaseActivity {
 
         setContentView(R.layout.dummy_layout);
 
+        //binding dummy value
+        tvDbCustomer = findViewById(R.id.tv_test_db_data);
         try {
             //init cipher, keystore, keys for encryption and decryption
             initEncryptor();
@@ -126,6 +131,8 @@ public class FirebaseDbModel extends BaseActivity {
                     e.printStackTrace();
                 }
                 Log.d(TAG, "Value is: " + value);
+                tvDbCustomer.setText(value);
+
             }
 
             @Override

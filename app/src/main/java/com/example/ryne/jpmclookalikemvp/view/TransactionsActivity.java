@@ -37,8 +37,6 @@ import javax.crypto.NoSuchPaddingException;
 
 public class TransactionsActivity extends BaseActivity {
 
-    //TODO: rv adapter containing a separate card view setup for TransactionActivity
-
     //TextViews
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
 
@@ -56,7 +54,7 @@ public class TransactionsActivity extends BaseActivity {
     //creating CheckingAccountAdapter variable called mAdapter
     TransactionsAdapter mAdapter;
 
-    //creating RecyclerView variable called mWeatherList
+    //creating RecyclerView variable
     private RecyclerView mCheckingAccountList;
 
     private static final int NUM_LIST_ITEMS = 50;
@@ -130,7 +128,7 @@ public class TransactionsActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String customerName = dataSnapshot.getValue(String.class);
                 try {
-                    customerName = cipherHandler.decrypt(customerName, masterKey.getPrivate());
+                    customerName = cipherHandler.decrypt(customerName, masterKey.getPrivate()); //System error as warning
                 } catch (InvalidKeyException e) {
                     e.printStackTrace();
                 } catch (BadPaddingException e) {

@@ -41,12 +41,12 @@ public class TransactionsActivity extends BaseActivity {
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills, mPrice, mValue;
 
     //CipherHandler for decrypt
-    CipherHandler cipherHandler;
-    private static final String TAG = "MainActivityTag";
-    private static final java.lang.String TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding";
-    private String alias = "master_key";
-    private KeyStoreHandler keyStoreHandler;
-    private KeyPair masterKey;
+    public CipherHandler cipherHandler;
+    public static final String TAG = "MainActivityTag";
+    public static final java.lang.String TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding";
+    public String alias = "master_key";
+    public KeyStoreHandler keyStoreHandler;
+    public KeyPair masterKey;
 
     //Database Ref object
     DatabaseReference mCustomer, dbPrice;
@@ -58,6 +58,10 @@ public class TransactionsActivity extends BaseActivity {
     private RecyclerView mCheckingAccountList;
 
     private static final int NUM_LIST_ITEMS = 50;
+
+    public TransactionsActivity(){
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
@@ -163,7 +167,7 @@ public class TransactionsActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 Log.d(TAG, "onDataChange: " + transactionPrice);
-                 mValue.setText(transactionPrice);   //returning null even though log picks up encrypted values
+                 mValue.setText(transactionPrice);  //returns values still encrypted
             }
 
             @Override

@@ -36,13 +36,13 @@ import javax.crypto.NoSuchPaddingException;
 
 public class FirebaseDbModel extends BaseActivity {
 
-    private DatabaseReference jpmcRef; //private reference for adding/using database data
-    private CipherHandler cipherHandler;
-    private static final String TAG = "MainActivityTag";
-    private static final java.lang.String TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding";
-    private String alias = "master_key";
-    private KeyStoreHandler keyStoreHandler;
-    private KeyPair masterKey;
+    public DatabaseReference jpmcRef; //private reference for adding/using database data
+    public CipherHandler cipherHandler;
+    public static final String TAG = "MainActivityTag";
+    public static final java.lang.String TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding";
+    public String alias = "master_key";
+    public KeyStoreHandler keyStoreHandler;
+    public KeyPair masterKey;
 
     TextView tvDbCustomer;
 

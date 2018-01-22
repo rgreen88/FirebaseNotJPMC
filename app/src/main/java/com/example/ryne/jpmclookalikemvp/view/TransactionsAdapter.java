@@ -18,13 +18,12 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     private static final String TAG = TransactionsAdapter.class.getSimpleName();
 
-    private int mCheckingBalanceItem;
+    private int mTransactionItem;
     Context context;
 
 
     public TransactionsAdapter(int numOfItems, Context context){
-        mCheckingBalanceItem = numOfItems;
-//        this.checkingBalanceHolders = checkingBalanceHolders;
+        mTransactionItem = numOfItems;
         this.context = context;
     }
 
@@ -51,7 +50,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     @Override
     public int getItemCount() {
-        return mCheckingBalanceItem;
+        return mTransactionItem;
     }
 
     class TransactionsHolder extends RecyclerView.ViewHolder{

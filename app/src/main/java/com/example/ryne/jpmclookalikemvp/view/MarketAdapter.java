@@ -18,13 +18,12 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MarketHold
 
     private static final String TAG = MarketAdapter.class.getSimpleName();
 
-    private int mCheckingBalanceItem;
+    private int mMarketItem;
     Context context;
 
 
     public MarketAdapter(int numOfItems, Context context){
-        mCheckingBalanceItem = numOfItems;
-//        this.checkingBalanceHolders = checkingBalanceHolders;
+        mMarketItem = numOfItems;
         this.context = context;
     }
 
@@ -51,7 +50,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MarketHold
 
     @Override
     public int getItemCount() {
-        return mCheckingBalanceItem;
+        return mMarketItem;
     }
 
     class MarketHolder extends RecyclerView.ViewHolder{

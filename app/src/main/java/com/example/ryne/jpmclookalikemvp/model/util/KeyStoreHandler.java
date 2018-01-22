@@ -58,9 +58,9 @@ public class KeyStoreHandler {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public KeyPair createAKSKeyPair(String alias) throws NoSuchProviderException, NoSuchAlgorithmException, InvalidAlgorithmParameterException{
+    public KeyPair createKeyPair(String alias) throws NoSuchProviderException, NoSuchAlgorithmException, InvalidAlgorithmParameterException{
 
-        keyPairGenerator = KeyPairGenerator.getInstance(CURRENT_ALGORITHM, KEYSTORE_PROVIDER); //algorith = ecrypt key type---KEYSTORE_PROVIDER = manufacturer (?)
+        keyPairGenerator = KeyPairGenerator.getInstance(CURRENT_ALGORITHM, KEYSTORE_PROVIDER); //algorithm = encrypt key type---KEYSTORE_PROVIDER = manufacturer (?)
 
         initGeneratorWithKeyPairParam(keyPairGenerator, alias);
         return keyPairGenerator.generateKeyPair();

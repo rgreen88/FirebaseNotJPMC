@@ -1,6 +1,5 @@
 package com.example.ryne.jpmclookalikemvp.model;
 
-import android.app.KeyguardManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -41,11 +40,8 @@ public class FirebaseDbModel extends BaseActivity {
     private static final String TAG = "MainActivityTag";
     private static final java.lang.String TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding";
     private String alias = "master_key";
-
-    private KeyguardManager keyguardManager;
     private KeyStoreHandler keyStoreHandler;
     private KeyPair masterKey;
-    private String encryptedData;
 
     public FirebaseDbModel() {
 
@@ -93,7 +89,7 @@ public class FirebaseDbModel extends BaseActivity {
         cipherHandler= new CipherHandler(TRANSFORMATION_ASYMMETRIC);
 
         //create asymmetric key pair
-        keyStoreHandler.createAKSKeyPair(alias);
+        keyStoreHandler.createKeyPair(alias);
 
         //get asymmetric key pair
         masterKey = keyStoreHandler.getAKSAsymmetricKeyPair(alias);

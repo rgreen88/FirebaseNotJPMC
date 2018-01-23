@@ -59,4 +59,5 @@
     <string name="cv_unrealized_gain_loss">Unrealized Gain/Loss</string>
     <string name="transaction_amount">transaction amount</string>
     <string name="_500">500</string>
+    <string name="value">Value</string>
 </resources>

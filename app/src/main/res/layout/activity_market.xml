@@ -55,7 +55,7 @@
             android:paddingStart="@dimen/default_padding"
             android:text="@string/unrealized_gains_losses"
             android:textAlignment="center"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:visibility="visible"
             android:paddingLeft="@dimen/default_padding"
             tools:ignore="RtlSymmetry" />
@@ -68,7 +68,7 @@
             android:paddingEnd="@dimen/default_padding"
             android:text="@string/currency"
             android:textAlignment="center"
-            android:textSize="22sp"
+            android:textSize="14sp"
             android:visibility="visible"
             android:paddingRight="@dimen/default_padding"
             tools:ignore="RtlSymmetry" />
@@ -81,7 +81,7 @@
             android:paddingStart="@dimen/default_padding"
             android:text="@string/today_s_change"
             android:textAlignment="center"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:visibility="visible"
             android:paddingLeft="@dimen/default_padding"
             tools:ignore="RtlSymmetry" />
@@ -94,7 +94,7 @@
             android:paddingEnd="@dimen/default_padding"
             android:text="@string/currency"
             android:textAlignment="center"
-            android:textSize="22sp"
+            android:textSize="14sp"
             android:visibility="visible"
             android:paddingRight="@dimen/default_padding"
             tools:ignore="RtlSymmetry" />

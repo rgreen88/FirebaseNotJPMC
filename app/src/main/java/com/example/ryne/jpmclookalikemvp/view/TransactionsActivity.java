@@ -72,23 +72,14 @@ public class TransactionsActivity extends BaseActivity {
         //binding views
         mGreeting = findViewById(R.id.tv_greeting);
         mCurrentDate = findViewById(R.id.tv_current_date);
-        mCheckingAccount = findViewById(R.id.tv_checking_account); //position counter rv
         mCurrency = findViewById(R.id.tv_currency);
-        mCheckingAccountList = findViewById(R.id.rv_recycler_view);
         mPayBills = findViewById(R.id.tv_pay_bills);
         mPrice = findViewById(R.id.tv_amount);
         mValue = findViewById(R.id.tv_value);
+        mCheckingAccountList = findViewById(R.id.rv_recycler_view);
+        mCheckingAccount = findViewById(R.id.tv_checking_account); //position counter rv
 
-
-        //RecyclerView LinearLayoutManager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mCheckingAccountList.setLayoutManager(layoutManager);
-        mCheckingAccountList.setHasFixedSize(true);
-
-        //setting adapter
-        mAdapter = new TransactionsAdapter(NUM_LIST_ITEMS, this);
-        mCheckingAccountList.setAdapter(mAdapter);
-
+        //before initializing rv
         try {
             //init cipher, keystore, keys for encryption and decryption
             initEncryptor();
@@ -106,6 +97,15 @@ public class TransactionsActivity extends BaseActivity {
                 | UnrecoverableKeyException e) {
             e.printStackTrace();
         }
+
+        //RecyclerView LinearLayoutManager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mCheckingAccountList.setLayoutManager(layoutManager);
+        mCheckingAccountList.setHasFixedSize(true);
+
+        //setting adapter
+        mAdapter = new TransactionsAdapter(NUM_LIST_ITEMS, this);
+        mCheckingAccountList.setAdapter(mAdapter);
 
     }
 

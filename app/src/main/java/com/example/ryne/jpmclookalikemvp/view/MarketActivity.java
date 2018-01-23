@@ -3,6 +3,7 @@ package com.example.ryne.jpmclookalikemvp.view;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
@@ -49,7 +50,7 @@ public class MarketActivity extends BaseActivity{
 
 
     //TextViews
-    TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mGainLoss, mValue, mShares;
+    TextView mCheckingAccount, mCurrentDate, mCurrency, mGainLoss, mValue, mShares;
     private String time;
 
     //creating MarketAdapter variable called mAdapter
@@ -69,7 +70,6 @@ public class MarketActivity extends BaseActivity{
         setContentView(R.layout.activity_market);
 
         //binding views
-        mGreeting = findViewById(R.id.tv_greeting);
         mCurrentDate = findViewById(R.id.tv_current_date_header);
         mCheckingAccount = findViewById(R.id.tv_checking_account); //position counter rv
         mCurrency = findViewById(R.id.tv_currency);
@@ -77,15 +77,15 @@ public class MarketActivity extends BaseActivity{
         mGainLoss = findViewById(R.id.tv_shares_gains_losses);
         mValue = findViewById(R.id.tv_value);
         mShares = findViewById(R.id.tv_shares_changes);
-//
-//        //RecyclerView LinearLayoutManager
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        mCheckingAccountList.setLayoutManager(layoutManager);
-//        mCheckingAccountList.setHasFixedSize(true);
-//
-//        //setting adapter
-//        mAdapter = new MarketAdapter(NUM_LIST_ITEMS, this);
-//        mCheckingAccountList.setAdapter(mAdapter);
+
+        //RecyclerView LinearLayoutManager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mCheckingAccountList.setLayoutManager(layoutManager);
+        mCheckingAccountList.setHasFixedSize(true);
+
+        //setting adapter
+        mAdapter = new MarketAdapter(NUM_LIST_ITEMS, this);
+        mCheckingAccountList.setAdapter(mAdapter);
 
         try {
             initEncryptor();
@@ -151,9 +151,9 @@ public class MarketActivity extends BaseActivity{
                     e.printStackTrace();
                 }
                 Log.d(TAG, "Value is: " + value);
-//                mCurrency.setText(value);
-//                mGainLoss.setText(value);  //TODO: Reactivate these after xml is done
-//                mShares.setText(value);
+                mCurrency.setText(value);
+                mGainLoss.setText(value);  //TODO: Reactivate these after xml is done
+                mShares.setText(value);
 
             }
 

@@ -14,6 +14,7 @@
         android:elevation="@dimen/cardview_default_elevation"
         card_view:cardCornerRadius="@dimen/cardview_default_radius"
         card_view:contentPadding="@dimen/default_padding"
+        card_view:cardBackgroundColor="@color/brown"
         tools:targetApi="lollipop">
 
        <FrameLayout
@@ -29,7 +30,8 @@
                android:layout_marginStart="24dp"
                android:layout_marginTop="8dp"
                android:text="@string/dummy_market_company"
-               android:textSize="16sp" />
+               android:textSize="16sp"
+               android:textColor="@color/white"/>
 
 
            <TextView
@@ -39,13 +41,15 @@
                android:layout_margin="24dp"
                android:paddingTop="8dp"
                android:text="@string/market"
-               android:textSize="16sp" />
+               android:textSize="16sp"
+               android:textColor="@color/white"/>
 
            <TextView
                android:id="@+id/tv_unrealized_gains_losses_cv"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:textAlignment="center"
+               android:textColor="@color/white"
                android:paddingTop="8dp"
                android:layout_gravity="center"
                android:layout_margin="24dp"
@@ -58,6 +62,7 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:textAlignment="textEnd"
+               android:textColor="@color/white"
                android:paddingTop="8dp"
                android:layout_margin="24dp"
 

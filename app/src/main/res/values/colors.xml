@@ -6,5 +6,7 @@
     <color name="lightGray">#e0e0e0</color>
     <color name="white">#ffffff</color>
     <color name="darkBrown">#3e2723</color>
+    <color name="green">#0a8f08</color>
+    <color name="brown">#795548</color>
 
 </resources>

@@ -14,6 +14,7 @@
         android:elevation="@dimen/cardview_default_elevation"
         card_view:cardCornerRadius="@dimen/cardview_default_radius"
         card_view:contentPadding="@dimen/default_padding"
+        card_view:cardBackgroundColor="@color/brown"
         tools:targetApi="lollipop">
 
         <FrameLayout
@@ -29,7 +30,8 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:text="position"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/cv_dummy_company"
@@ -41,7 +43,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/dummy_market_company"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/cv_transaction"
@@ -51,7 +54,8 @@
                 android:layout_gravity="bottom|start"
                 android:paddingTop="8dp"
                 android:text="@string/transaction"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
 
 
 
@@ -64,7 +68,8 @@
                 android:layout_margin="24dp"
                 android:layout_gravity="bottom|end"
                 android:text="@string/price"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
 
 
         </FrameLayout>

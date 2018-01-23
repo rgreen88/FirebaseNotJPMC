@@ -9,12 +9,17 @@ import android.widget.TextView;
 
 import com.example.ryne.jpmclookalikemvp.R;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class CheckingAccountActivity extends BaseActivity{
 
     private static final String TAG = "log";
 
     //TextViews
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
+
+    private String time;
 
     //creating CheckingAccountAdapter variable called mAdapter
     CheckingAccountAdapter mAdapter;
@@ -46,6 +51,9 @@ public class CheckingAccountActivity extends BaseActivity{
         mAdapter = new CheckingAccountAdapter(NUM_LIST_ITEMS, this);
         mCheckingAccountList.setAdapter(mAdapter);
 
+        //setting time in TextView
+        time = DateFormat.getDateTimeInstance().format(new Date());
+        mCurrentDate.setText(time);
     }
 
     @VisibleForTesting

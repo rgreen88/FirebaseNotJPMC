@@ -42,6 +42,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     private int mTransactionItem;
     private Context context;
+
     //display position in list using getItemCount() - 1
     private TextView listCheckingBalanceView;
     private static final String TAG = "MainActivityTag";
@@ -121,7 +122,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         public TransactionsHolder(View itemView) {
             super(itemView);
 
-            mPrice = itemView.findViewById(R.id.tv_amount);
+            mPrice = itemView.findViewById(R.id.cv_amount);
 
             listCheckingBalanceView = itemView.findViewById(R.id.tv_checking_account); //TODO: Probably the culprit behind the crashes from list number views on rv
 

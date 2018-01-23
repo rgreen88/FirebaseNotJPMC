@@ -3,7 +3,6 @@ package com.example.ryne.jpmclookalikemvp.view;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
@@ -38,7 +37,7 @@ import javax.crypto.NoSuchPaddingException;
 public class TransactionsActivity extends BaseActivity {
 
     //TextViews
-    TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills, mPrice, mValue;
+    TextView mCompany, mCheckingAccount, mCurrency;
 
     //CipherHandler for decrypt
     public CipherHandler cipherHandler;
@@ -70,12 +69,8 @@ public class TransactionsActivity extends BaseActivity {
         setContentView(R.layout.activity_transactions);
 
         //binding views
-        mGreeting = findViewById(R.id.tv_greeting);
-        mCurrentDate = findViewById(R.id.tv_current_date);
+        mCompany = findViewById(R.id.tv_dummy_company);
         mCurrency = findViewById(R.id.tv_currency);
-        mPayBills = findViewById(R.id.tv_pay_bills);
-        mPrice = findViewById(R.id.tv_amount);
-        mValue = findViewById(R.id.tv_value);
         mCheckingAccountList = findViewById(R.id.rv_recycler_view);
         mCheckingAccount = findViewById(R.id.tv_checking_account); //position counter rv
 
@@ -98,14 +93,15 @@ public class TransactionsActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        //RecyclerView LinearLayoutManager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mCheckingAccountList.setLayoutManager(layoutManager);
-        mCheckingAccountList.setHasFixedSize(true);
-
-        //setting adapter
-        mAdapter = new TransactionsAdapter(NUM_LIST_ITEMS, this);
-        mCheckingAccountList.setAdapter(mAdapter);
+        //TODO: Don't forget to reinstate RecyclerView
+//        //RecyclerView LinearLayoutManager
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        mCheckingAccountList.setLayoutManager(layoutManager);
+//        mCheckingAccountList.setHasFixedSize(true);
+//
+//        //setting adapter
+//        mAdapter = new TransactionsAdapter(NUM_LIST_ITEMS, this);
+//        mCheckingAccountList.setAdapter(mAdapter);
 
     }
 
@@ -159,15 +155,13 @@ public class TransactionsActivity extends BaseActivity {
                 String transactionPrice = dataSnapshot.getValue(String.class);
                 try {
                     transactionPrice = cipherHandler.decrypt(transactionPrice, masterKey.getPrivate()); //System error as warning
-                } catch (InvalidKeyException e) {
-                    e.printStackTrace();
-                } catch (BadPaddingException e) {
-                    e.printStackTrace();
-                } catch (IllegalBlockSizeException e) {
+                } catch ( InvalidKeyException
+                        | IllegalBlockSizeException
+                        | BadPaddingException e) {
                     e.printStackTrace();
                 }
+                mCurrency.setText(transactionPrice);
                 Log.d(TAG, "onDataChange: " + transactionPrice);
-                 mValue.setText(transactionPrice);  //returns values still encrypted
             }
 
             @Override

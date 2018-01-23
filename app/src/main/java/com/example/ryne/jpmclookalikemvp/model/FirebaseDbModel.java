@@ -123,11 +123,9 @@ public class FirebaseDbModel extends BaseActivity {
                 String value = dataSnapshot.getValue(String.class);
                 try {
                     value = cipherHandler.decrypt(value, masterKey.getPrivate());
-                } catch (InvalidKeyException e) {
-                    e.printStackTrace();
-                } catch (BadPaddingException e) {
-                    e.printStackTrace();
-                } catch (IllegalBlockSizeException e) {
+                } catch ( InvalidKeyException
+                        | IllegalBlockSizeException
+                        | BadPaddingException e) {
                     e.printStackTrace();
                 }
                 Log.d(TAG, "Value is: " + value);
@@ -198,11 +196,9 @@ public class FirebaseDbModel extends BaseActivity {
                 String value = dataSnapshot.getValue(String.class);
                 try {
                     value = cipherHandler.decrypt(value, masterKey.getPrivate());
-                } catch (InvalidKeyException e) {
-                    e.printStackTrace();
-                } catch (BadPaddingException e) {
-                    e.printStackTrace();
-                } catch (IllegalBlockSizeException e) {
+                } catch ( InvalidKeyException
+                        | IllegalBlockSizeException
+                        | BadPaddingException e) {
                     e.printStackTrace();
                 }
                 Log.d(TAG, "Value is: " + value);
@@ -244,14 +240,13 @@ public class FirebaseDbModel extends BaseActivity {
                 String value = dataSnapshot.getValue(String.class);
                 try {
                     value = cipherHandler.decrypt(value, masterKey.getPrivate());
-                } catch (InvalidKeyException e) {
-                    e.printStackTrace();
-                } catch (BadPaddingException e) {
-                    e.printStackTrace();
-                } catch (IllegalBlockSizeException e) {
+                } catch ( InvalidKeyException
+                        | IllegalBlockSizeException
+                        | BadPaddingException e) {
                     e.printStackTrace();
                 }
                 Log.d(TAG, "Value is: " + value);
+
             }
 
             @Override

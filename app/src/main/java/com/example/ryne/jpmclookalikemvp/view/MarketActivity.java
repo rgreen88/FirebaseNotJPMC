@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import com.example.ryne.jpmclookalikemvp.R;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 /**
  * Created by rynel on 1/16/2018.
  */
@@ -16,7 +19,9 @@ public class MarketActivity extends BaseActivity{
     //TextViews
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
 
-    //creating CheckingAccountAdapter variable called mAdapter
+    private String time;
+
+    //creating MarketAdapter variable called mAdapter
     MarketAdapter mAdapter;
 
     //creating RecyclerView variable called mWeatherList
@@ -33,7 +38,7 @@ public class MarketActivity extends BaseActivity{
 
         //binding views
         mGreeting = findViewById(R.id.tv_greeting);
-        mCurrentDate = findViewById(R.id.tv_current_date);
+        mCurrentDate = findViewById(R.id.tv_current_date_header);
         mCheckingAccount = findViewById(R.id.tv_checking_account); //position counter rv
         mCurrency = findViewById(R.id.tv_currency);
         mCheckingAccountList = findViewById(R.id.rv_recycler_view);
@@ -47,5 +52,11 @@ public class MarketActivity extends BaseActivity{
         //setting adapter
         mAdapter = new MarketAdapter(NUM_LIST_ITEMS, this);
         mCheckingAccountList.setAdapter(mAdapter);
+
+        //setting time in TextView
+        time = DateFormat.getDateTimeInstance().format(new Date());
+        mCurrentDate.setText(time);
+
     }
+
 }

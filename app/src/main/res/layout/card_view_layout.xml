@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="@dimen/cardview_default_elevation"
+        card_view:cardBackgroundColor="@color/brown"
         card_view:cardCornerRadius="@dimen/cardview_default_radius"
         card_view:contentPadding="@dimen/default_padding"
         tools:targetApi="lollipop">
@@ -28,6 +29,7 @@
             android:text="@string/pay_bills"
             android:textAlignment="textEnd"
             android:textSize="18sp"
+            android:textColor="@color/white"
             android:layout_gravity="end" />
 
         <TextView
@@ -39,7 +41,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/checking_acct"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="@color/white"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -64,7 +67,8 @@
                 android:layout_alignParentTop="true"
                 android:paddingTop="8dp"
                 android:text="@string/currency"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tv_available_balance"
@@ -74,6 +78,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:text="@string/available_balance"
+                android:textColor="@color/white"
                 android:textAlignment="viewEnd"
                 android:gravity="end" />
 

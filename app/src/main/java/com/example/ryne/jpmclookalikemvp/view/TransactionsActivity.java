@@ -126,7 +126,7 @@ public class TransactionsActivity extends BaseActivity {
 
     public void getCustomerName() {
         //getting reference
-        mCustomer = FirebaseDatabase.getInstance().getReference("Customer");
+        mCustomer = FirebaseDatabase.getInstance().getReference("Customer").child("Name");
 
         //getting name from database
         mCustomer.addValueEventListener(new ValueEventListener() {
@@ -148,22 +148,22 @@ public class TransactionsActivity extends BaseActivity {
 
     public void getPrice() {
         //getting reference
-        dbPrice = FirebaseDatabase.getInstance().getReference("Transactions");
+        dbPrice = FirebaseDatabase.getInstance().getReference("Transactions").child("Purchases");
 
         //getting name from database
         dbPrice.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String transactionPrice = dataSnapshot.getValue(String.class);
+                String value = dataSnapshot.getValue(String.class);
                 try {
-                    transactionPrice = cipherHandler.decrypt(transactionPrice, masterKey.getPrivate()); //System error as warning
+                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
                 } catch ( InvalidKeyException
                         | IllegalBlockSizeException
                         | BadPaddingException e) {
                     e.printStackTrace();
                 }
-                mCurrency.setText(transactionPrice);
-                Log.d(TAG, "onDataChange: " + transactionPrice);
+                mCurrency.setText(value);
+                Log.d(TAG, "onDataChange: " + value);
             }
 
             @Override

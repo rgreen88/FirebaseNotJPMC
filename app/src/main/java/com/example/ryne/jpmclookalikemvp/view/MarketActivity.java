@@ -156,9 +156,9 @@ public class MarketActivity extends BaseActivity{
                     e.printStackTrace();
                 }
                 Log.d(TAG, "Value is: " + value);
-                mCurrency.setText(value);
-                mGainLoss.setText(value);  //TODO: Reactivate these after xml is done
-                mShares.setText(value);
+//                mCurrency.setText(value);
+//                mGainLoss.setText(value);  //TODO: Reactivate these after xml is done
+//                mShares.setText(value);
 
             }
 

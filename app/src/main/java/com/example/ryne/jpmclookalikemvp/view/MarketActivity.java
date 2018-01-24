@@ -138,7 +138,7 @@ public class MarketActivity extends BaseActivity{
 
 
         // Write a message to the database...may need to space out reference objects
-        jpmcRef = FirebaseDatabase.getInstance().getReference("Customer");
+        jpmcRef = FirebaseDatabase.getInstance().getReference("Customer").child("Name");
 
         // Read from the database
         jpmcRef.addValueEventListener(new ValueEventListener() {

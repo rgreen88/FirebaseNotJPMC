@@ -12,7 +12,10 @@
         android:layout_height="wrap_content"
         android:text="@string/populate_fb_db"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        tools:layout_editor_absoluteY="8dp"
+        android:paddingStart="@dimen/default_padding"
+        android:paddingLeft="@dimen/default_padding"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/tv_test_db_checking"
@@ -20,7 +23,10 @@
         android:layout_height="wrap_content"
         android:text="@string/populate_fb_db"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        tools:layout_editor_absoluteY="8dp"
+        android:paddingStart="@dimen/default_padding"
+        android:paddingLeft="@dimen/default_padding"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/tv_test_db_transaction"
@@ -28,7 +34,10 @@
         android:layout_height="wrap_content"
         android:text="@string/populate_fb_db"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        tools:layout_editor_absoluteY="8dp"
+        android:paddingStart="@dimen/default_padding"
+        android:paddingLeft="@dimen/default_padding"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/tv_test_db_market"
@@ -36,6 +45,9 @@
         android:layout_height="wrap_content"
         android:text="@string/populate_fb_db"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        tools:layout_editor_absoluteY="8dp"
+        android:paddingStart="@dimen/default_padding"
+        android:paddingLeft="@dimen/default_padding"
+        tools:ignore="RtlSymmetry" />
 
 </LinearLayout>

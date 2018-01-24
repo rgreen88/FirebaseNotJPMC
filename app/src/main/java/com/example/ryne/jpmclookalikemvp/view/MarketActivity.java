@@ -39,9 +39,10 @@ import javax.crypto.NoSuchPaddingException;
 
 public class MarketActivity extends BaseActivity{
 
-    //cipher referencing
     private static final String TAG = "MarketActivity";
     public DatabaseReference jpmcRef; //reference for adding/using database data
+
+    //cipher
     public CipherHandler cipherHandler;
     public static final java.lang.String TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding";
     public String alias = "master_key";
@@ -52,6 +53,10 @@ public class MarketActivity extends BaseActivity{
     //TextViews
     TextView mCheckingAccount, mCurrentDate, mCurrency, mGainLoss, mValue, mShares;
     private String time;
+
+    public MarketActivity(){
+
+    }
 
     //creating MarketAdapter variable called mAdapter
     MarketAdapter mAdapter;

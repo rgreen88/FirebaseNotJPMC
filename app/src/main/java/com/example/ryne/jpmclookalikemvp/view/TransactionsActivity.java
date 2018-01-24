@@ -40,9 +40,10 @@ public class TransactionsActivity extends BaseActivity {
     //TextViews
     TextView mCompany, mCheckingAccount, mCurrency;
 
+    public static final String TAG = "MainActivityTag";
+
     //CipherHandler for decrypt
     public CipherHandler cipherHandler;
-    public static final String TAG = "MainActivityTag";
     public static final java.lang.String TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding";
     public String alias = "master_key";
     public KeyStoreHandler keyStoreHandler;

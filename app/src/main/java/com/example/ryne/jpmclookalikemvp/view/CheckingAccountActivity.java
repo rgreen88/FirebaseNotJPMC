@@ -1,19 +1,51 @@
 package com.example.ryne.jpmclookalikemvp.view;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.ryne.jpmclookalikemvp.R;
+import com.example.ryne.jpmclookalikemvp.model.util.CipherHandler;
+import com.example.ryne.jpmclookalikemvp.model.util.KeyStoreHandler;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.KeyPair;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class CheckingAccountActivity extends BaseActivity{
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
-    private static final String TAG = "log";
+public class CheckingAccountActivity extends BaseActivity {
+
+    private static final String TAG = "checkingacct";
+
+    public DatabaseReference jpmcRef; //reference for adding/using database data
+
+    //cipher
+    public CipherHandler cipherHandler;
+    public static final java.lang.String TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding";
+    public String alias = "master_key";
+    public KeyStoreHandler keyStoreHandler;
+    public KeyPair masterKey;
 
     //TextViews
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
@@ -28,6 +60,7 @@ public class CheckingAccountActivity extends BaseActivity{
 
     private static final int NUM_LIST_ITEMS = 50;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +86,93 @@ public class CheckingAccountActivity extends BaseActivity{
         //setting time in TextView
         time = DateFormat.getDateTimeInstance().format(new Date());
         mCurrentDate.setText(time);
+
+        try {
+            initEncryptor();
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (UnrecoverableKeyException e) {
+            e.printStackTrace();
+        }
+        try {
+            getCustomerGreeting();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    private void initEncryptor() throws CertificateException, NoSuchAlgorithmException,
+            KeyStoreException, IOException, NoSuchPaddingException, NoSuchProviderException,
+            InvalidAlgorithmParameterException, UnrecoverableKeyException {
+
+        //initialize wrapper classes
+        keyStoreHandler = new KeyStoreHandler(this);
+        cipherHandler = new CipherHandler(TRANSFORMATION_ASYMMETRIC);
+
+        //create asymmetric key pair
+        keyStoreHandler.createKeyPair(alias);
+
+        //get asymmetric key pair
+        masterKey = keyStoreHandler.getAKSAsymmetricKeyPair(alias);
+
+    }
+
+
+    public void getCustomerGreeting() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
+
+
+        // Referencing database path...may need to space out reference objects
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //TODO: Cipher
+        jpmcRef = database.getReference("Customer").child("Name");
+
+        // Could use loop to read each datum in db if I can understand accessing info better
+        // instead of invoking method manually each time with too much redundancy
+        jpmcRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                //TODO: Decrypt
+                String value = dataSnapshot.getValue(String.class);
+                try {
+                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
+                } catch (InvalidKeyException
+                        | IllegalBlockSizeException
+                        | BadPaddingException e) {
+                    e.printStackTrace();
+                }
+                Log.d(TAG, "Value is: " + value);
+                // dbRef.child(key).child("description").setValue(item);
+                mGreeting.setText(value);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "Cancelled");
+            }
+
+        });
+
+    }
     @VisibleForTesting
     public ProgressDialog mProgressDialog;
 

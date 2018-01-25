@@ -3,7 +3,6 @@ package com.example.ryne.jpmclookalikemvp.view;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -42,14 +41,14 @@ public class CheckingAccountActivity extends BaseActivity{
         mCheckingAccountList = findViewById(R.id.rv_recycler_view);
         mPayBills = findViewById(R.id.tv_pay_bills);
 
-        //RecyclerView LinearLayoutManager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mCheckingAccountList.setLayoutManager(layoutManager);
-        mCheckingAccountList.setHasFixedSize(true);
-
-        //setting adapter
-        mAdapter = new CheckingAccountAdapter(NUM_LIST_ITEMS, this);
-        mCheckingAccountList.setAdapter(mAdapter);
+//        //RecyclerView LinearLayoutManager
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        mCheckingAccountList.setLayoutManager(layoutManager);
+//        mCheckingAccountList.setHasFixedSize(true);
+//
+//        //setting adapter
+//        mAdapter = new CheckingAccountAdapter(NUM_LIST_ITEMS, this);
+//        mCheckingAccountList.setAdapter(mAdapter);
 
         //setting time in TextView
         time = DateFormat.getDateTimeInstance().format(new Date());

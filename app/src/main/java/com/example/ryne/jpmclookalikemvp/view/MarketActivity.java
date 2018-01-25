@@ -3,7 +3,6 @@ package com.example.ryne.jpmclookalikemvp.view;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
@@ -84,13 +83,13 @@ public class MarketActivity extends BaseActivity{
         mShares = findViewById(R.id.tv_shares_changes);
 
         //RecyclerView LinearLayoutManager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mCheckingAccountList.setLayoutManager(layoutManager);
-        mCheckingAccountList.setHasFixedSize(true);
-
-        //setting adapter
-        mAdapter = new MarketAdapter(NUM_LIST_ITEMS, this);
-        mCheckingAccountList.setAdapter(mAdapter);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        mCheckingAccountList.setLayoutManager(layoutManager);
+//        mCheckingAccountList.setHasFixedSize(true);
+//
+//        //setting adapter
+//        mAdapter = new MarketAdapter(NUM_LIST_ITEMS, this);
+//        mCheckingAccountList.setAdapter(mAdapter);
 
         try {
             initEncryptor();

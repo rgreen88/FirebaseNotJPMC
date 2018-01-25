@@ -3,7 +3,6 @@ package com.example.ryne.jpmclookalikemvp.view;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
@@ -95,15 +94,15 @@ public class TransactionsActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        //TODO: Don't forget to reinstate RecyclerView
-        //RecyclerView LinearLayoutManager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mCheckingAccountList.setLayoutManager(layoutManager);
-        mCheckingAccountList.setHasFixedSize(true);
-
-        //setting adapter
-        mAdapter = new TransactionsAdapter(NUM_LIST_ITEMS, this);
-        mCheckingAccountList.setAdapter(mAdapter);
+        //TODO: Don't forget to reinstate RecyclerViews
+//        //RecyclerView LinearLayoutManager
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        mCheckingAccountList.setLayoutManager(layoutManager);
+//        mCheckingAccountList.setHasFixedSize(true);
+//
+//        //setting adapter
+//        mAdapter = new TransactionsAdapter(NUM_LIST_ITEMS, this);
+//        mCheckingAccountList.setAdapter(mAdapter);
 
     }
 

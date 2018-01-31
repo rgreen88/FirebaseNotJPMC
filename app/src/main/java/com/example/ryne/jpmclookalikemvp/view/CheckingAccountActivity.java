@@ -136,16 +136,57 @@ public class CheckingAccountActivity extends BaseActivity {
 
     }
 
+    //TODO: implementing thread in parts starting with a structure
+    static class RunnableDemo implements Runnable {
+        private Thread t;
+        private String threadName;
+
+        RunnableDemo( String name) {
+            threadName = name;
+            System.out.println("Creating " +  threadName );
+        }
+
+        public void run() {
+            System.out.println("Running " +  threadName );
+            try {
+                for(int i = 4; i > 0; i--) {
+                    System.out.println("Thread: " + threadName + ", " + i);
+                    // Let the thread sleep for a while.
+                    Thread.sleep(50);
+                }
+            } catch (InterruptedException e) {
+                System.out.println("Thread " +  threadName + " interrupted.");
+            }
+            System.out.println("Thread " +  threadName + " exiting.");
+        }
+
+        public void start () {
+            System.out.println("Starting " +  threadName );
+            if (t == null) {
+                t = new Thread (this, threadName);
+                t.start ();
+            }
+        }
+    }
+
+    public static class TestThread {
+
+        public static void main(String args[]) {
+            RunnableDemo R1 = new RunnableDemo( "Thread-1");
+            R1.start();
+
+            RunnableDemo R2 = new RunnableDemo( "Thread-2");
+            R2.start();
+        }
+    }
+
 
     //TODO: create threading for datasnap
     public void getCustomerGreeting() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
         // Referencing database path...may need to space out reference objects
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //TODO: Cipher
+        //TODO: Cipher decrypt from database
         jpmcRef = database.getReference("Customer").child("Name");
-
-        // Could use loop to read each datum in db if I can understand accessing info better
-        // instead of invoking method manually each time with too much redundancy
         jpmcRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -161,7 +202,6 @@ public class CheckingAccountActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 Log.d(TAG, "Value is: " + value);
-                // dbRef.child(key).child("description").setValue(item);
                 mGreeting.setText(value);
 
             }

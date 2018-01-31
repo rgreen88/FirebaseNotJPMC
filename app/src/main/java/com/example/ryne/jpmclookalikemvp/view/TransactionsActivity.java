@@ -140,7 +140,8 @@ public class TransactionsActivity extends BaseActivity {
         }
 
         public void run() {
-            // Write a message to the database...may need to space out reference objects
+
+            // getCustomer()
             mCustomer = FirebaseDatabase.getInstance().getReference("Customer").child("Name");
 
             // Read from the database
@@ -170,8 +171,34 @@ public class TransactionsActivity extends BaseActivity {
                     // Failed to read value
                     Log.w(TAG, "Failed to read value.", error.toException());
                 }
+
             });
 
+            //getPrice()
+            dbPrice = FirebaseDatabase.getInstance().getReference("Transactions").child("Purchases");
+
+            //getting name from database
+            dbPrice.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String value = dataSnapshot.getValue(String.class);
+                    try {
+                        value = cipherHandler.decrypt(value, masterKey.getPrivate());
+                    } catch ( InvalidKeyException
+                            | IllegalBlockSizeException
+                            | BadPaddingException e) {
+                        e.printStackTrace();
+                    }
+                    mCurrency.setText(value);
+                    Log.d(TAG, "onDataChange: " + value);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException());
+                }
+            });
         }
 
         public void start() {

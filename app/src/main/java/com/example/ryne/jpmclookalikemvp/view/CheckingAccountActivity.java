@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
@@ -74,15 +75,6 @@ public class CheckingAccountActivity extends BaseActivity {
         mCheckingAccountList = findViewById(R.id.rv_recycler_view);
         mPayBills = findViewById(R.id.tv_pay_bills);
 
-//        //RecyclerView LinearLayoutManager
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        mCheckingAccountList.setLayoutManager(layoutManager);
-//        mCheckingAccountList.setHasFixedSize(true);
-//
-//        //setting adapter
-//        mAdapter = new CheckingAccountAdapter(NUM_LIST_ITEMS, this);
-//        mCheckingAccountList.setAdapter(mAdapter);
-
         //setting time in TextView
         time = DateFormat.getDateTimeInstance().format(new Date());
         mCurrentDate.setText(time);
@@ -115,8 +107,18 @@ public class CheckingAccountActivity extends BaseActivity {
         } catch (IllegalBlockSizeException e) {
             e.printStackTrace();
         }
+
+        //RecyclerView LinearLayoutManager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mCheckingAccountList.setLayoutManager(layoutManager);
+        mCheckingAccountList.setHasFixedSize(true);
+
+        //setting adapter
+        mAdapter = new CheckingAccountAdapter(NUM_LIST_ITEMS, this);
+        mCheckingAccountList.setAdapter(mAdapter);
     }
 
+    //TODO: create threading for initEncryptor (should be able to reuse and recall right?)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void initEncryptor() throws CertificateException, NoSuchAlgorithmException,
             KeyStoreException, IOException, NoSuchPaddingException, NoSuchProviderException,
@@ -135,9 +137,8 @@ public class CheckingAccountActivity extends BaseActivity {
     }
 
 
+    //TODO: create threading for datasnap
     public void getCustomerGreeting() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
-
-
         // Referencing database path...may need to space out reference objects
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //TODO: Cipher

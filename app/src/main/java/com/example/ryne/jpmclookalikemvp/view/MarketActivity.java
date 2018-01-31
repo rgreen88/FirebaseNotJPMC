@@ -3,6 +3,7 @@ package com.example.ryne.jpmclookalikemvp.view;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
@@ -82,15 +83,6 @@ public class MarketActivity extends BaseActivity{
         mValue = findViewById(R.id.tv_value);
         mShares = findViewById(R.id.tv_shares_changes);
 
-        //RecyclerView LinearLayoutManager
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        mCheckingAccountList.setLayoutManager(layoutManager);
-//        mCheckingAccountList.setHasFixedSize(true);
-//
-//        //setting adapter
-//        mAdapter = new MarketAdapter(NUM_LIST_ITEMS, this);
-//        mCheckingAccountList.setAdapter(mAdapter);
-
         try {
             initEncryptor();
             getInvestment();
@@ -114,8 +106,20 @@ public class MarketActivity extends BaseActivity{
 
         //setting TextView mValue
         mValue.setText(R.string.value);
+
+        //perform all actions before recycler view is set
+
+        //RecyclerView LinearLayoutManager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mCheckingAccountList.setLayoutManager(layoutManager);
+        mCheckingAccountList.setHasFixedSize(true);
+
+        //setting adapter
+        mAdapter = new MarketAdapter(NUM_LIST_ITEMS, this);
+        mCheckingAccountList.setAdapter(mAdapter);
     }
 
+    //TODO: create threading for initEncryptor (should be able to reuse and recall right?)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void initEncryptor() throws CertificateException, NoSuchAlgorithmException,
             KeyStoreException, IOException, NoSuchPaddingException, NoSuchProviderException,
@@ -133,9 +137,8 @@ public class MarketActivity extends BaseActivity{
 
     }
 
+    //TODO: create threading for datasnap
     public void getInvestment() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
-
-
         // Write a message to the database...may need to space out reference objects
         jpmcRef = FirebaseDatabase.getInstance().getReference("Customer").child("Name");
 

@@ -53,6 +53,7 @@ public class MarketActivity extends BaseActivity{
     //TextViews
     TextView mCheckingAccount, mCurrentDate, mCurrency, mGainLoss, mValue, mShares;
     private String time;
+    private String name = "";
 
     public MarketActivity(){
 
@@ -85,7 +86,7 @@ public class MarketActivity extends BaseActivity{
 
         try {
             initEncryptor();
-            getInvestment();
+            //getInvestment();
         } catch (CertificateException
                 | NoSuchAlgorithmException
                 | KeyStoreException
@@ -94,11 +95,12 @@ public class MarketActivity extends BaseActivity{
                 | NoSuchProviderException
                 | InvalidAlgorithmParameterException
                 | UnrecoverableKeyException
-                | BadPaddingException
-                | IllegalBlockSizeException
-                | InvalidKeyException e) {
+                 e) {
             e.printStackTrace();
         }
+
+        Thread marketThread = new Thread(new RunnableMarket(name));
+        marketThread.start();  //should be start();
 
         //setting time in TextView
         time = DateFormat.getDateTimeInstance().format(new Date());
@@ -137,39 +139,92 @@ public class MarketActivity extends BaseActivity{
 
     }
 
-    //TODO: create threading for datasnap
-    public void getInvestment() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
-        // Write a message to the database...may need to space out reference objects
-        jpmcRef = FirebaseDatabase.getInstance().getReference("Customer").child("Name");
+    class RunnableMarket implements Runnable {
+        private Thread t;
+        private String threadName;
 
-        // Read from the database
-        jpmcRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                //TODO: Decrypt
-                String value = dataSnapshot.getValue(String.class);
-                try {
-                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
-                } catch ( InvalidKeyException
-                        | IllegalBlockSizeException
-                        | BadPaddingException e) {
-                    e.printStackTrace();
-                }
-                Log.d(TAG, "Value is: " + value);
+        RunnableMarket( String name) {
+            threadName = name;
+            //    System.out.println("Creating " +  threadName );
+        }
+
+        public void run() {
+            // Write a message to the database...may need to space out reference objects
+            jpmcRef = FirebaseDatabase.getInstance().getReference("Customer").child("Name");
+
+            // Read from the database
+            jpmcRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    //TODO: Decrypt
+                    String value = dataSnapshot.getValue(String.class);
+                    try {
+                        value = cipherHandler.decrypt(value, masterKey.getPrivate());
+                    } catch ( InvalidKeyException
+                            | IllegalBlockSizeException
+                            | BadPaddingException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d(TAG, "Value is: " + value);
 //                mCurrency.setText(value);
 //                mGainLoss.setText(value);  //TODO: Reactivate these after xml is done
 //                mShares.setText(value);
 
-            }
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException());
+                }
+            });
+
+        }
+
+        public void start () {
+
+            //start the database data retrieval
+            if (t == null) {
+                t = new Thread (this, threadName);
+                t.start ();
             }
-        });
+        }
     }
+    //TODO: create threading for datasnap
+//    public void getInvestment() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
+//        // Write a message to the database...may need to space out reference objects
+//        jpmcRef = FirebaseDatabase.getInstance().getReference("Customer").child("Name");
+//
+//        // Read from the database
+//        jpmcRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                //TODO: Decrypt
+//                String value = dataSnapshot.getValue(String.class);
+//                try {
+//                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
+//                } catch ( InvalidKeyException
+//                        | IllegalBlockSizeException
+//                        | BadPaddingException e) {
+//                    e.printStackTrace();
+//                }
+//                Log.d(TAG, "Value is: " + value);
+////                mCurrency.setText(value);
+////                mGainLoss.setText(value);  //TODO: Reactivate these after xml is done
+////                mShares.setText(value);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
+//    }
 
 }

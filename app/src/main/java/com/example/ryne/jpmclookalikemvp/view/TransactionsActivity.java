@@ -49,6 +49,8 @@ public class TransactionsActivity extends BaseActivity {
     public KeyStoreHandler keyStoreHandler;
     public KeyPair masterKey;
 
+    private String name = "";
+
     //Database Ref object
     DatabaseReference mCustomer, dbPrice;
 
@@ -80,8 +82,7 @@ public class TransactionsActivity extends BaseActivity {
         try {
             //init cipher, keystore, keys for encryption and decryption
             initEncryptor();
-            getCustomerName();
-            getPrice();
+
 
             //catch exceptions for all crypto messages
         } catch (CertificateException
@@ -94,6 +95,9 @@ public class TransactionsActivity extends BaseActivity {
                 | UnrecoverableKeyException e) {
             e.printStackTrace();
         }
+
+        Thread transactionThread = new Thread(new RunnableTransaction(name));
+        transactionThread.start();  //should be start();
 
         //TODO: Don't forget to reinstate RecyclerViews
         //RecyclerView LinearLayoutManager
@@ -125,54 +129,108 @@ public class TransactionsActivity extends BaseActivity {
 
     }
 
-    //TODO: create threading for datasnap
-    public void getCustomerName() {
-        //getting reference
-        mCustomer = FirebaseDatabase.getInstance().getReference("Customer").child("Name");
 
-        //getting name from database
-        mCustomer.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String customerName = dataSnapshot.getValue(String.class);
-//                    customerName = cipherHandler.decrypt(customerName, masterKey.getPrivate()); //System error as warning
-                Log.d(TAG, "onDataChange: " + customerName);
-//                 mCheckingAccount.setText(customerName);   returning null even though log picks up encrypted values
-            }
+    class RunnableTransaction implements Runnable {
+        private Thread t;
+        private String threadName;
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-    }
+        RunnableTransaction(String name) {
+            threadName = name;
+            //    System.out.println("Creating " +  threadName );
+        }
 
-    public void getPrice() {
-        //getting reference
-        dbPrice = FirebaseDatabase.getInstance().getReference("Transactions").child("Purchases");
+        public void run() {
+            // Write a message to the database...may need to space out reference objects
+            mCustomer = FirebaseDatabase.getInstance().getReference("Customer").child("Name");
 
-        //getting name from database
-        dbPrice.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                try {
-                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
-                } catch ( InvalidKeyException
-                        | IllegalBlockSizeException
-                        | BadPaddingException e) {
-                    e.printStackTrace();
+            // Read from the database
+            mCustomer.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    //TODO: Decrypt
+                    String value = dataSnapshot.getValue(String.class);
+                    try {
+                        value = cipherHandler.decrypt(value, masterKey.getPrivate());
+                    } catch (InvalidKeyException
+                            | IllegalBlockSizeException
+                            | BadPaddingException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d(TAG, "Value is: " + value);
+//                mCurrency.setText(value);
+//                mGainLoss.setText(value);  //TODO: Reactivate these after xml is done
+//                mShares.setText(value);
+
                 }
-                mCurrency.setText(value);
-                Log.d(TAG, "onDataChange: " + value);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException());
+                }
+            });
+
+        }
+
+        public void start() {
+
+            //start the database data retrieval
+            if (t == null) {
+                t = new Thread(this, threadName);
+                t.start();
             }
-        });
+        }
     }
+//    //TODO: create threading for datasnap
+//    public void getCustomerName() {
+//        //getting reference
+//        mCustomer = FirebaseDatabase.getInstance().getReference("Customer").child("Name");
+//
+//        //getting name from database
+//        mCustomer.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String customerName = dataSnapshot.getValue(String.class);
+////                    customerName = cipherHandler.decrypt(customerName, masterKey.getPrivate()); //System error as warning
+//                Log.d(TAG, "onDataChange: " + customerName);
+////                 mCheckingAccount.setText(customerName);   returning null even though log picks up encrypted values
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
+//    }
+
+//    public void getPrice() {
+//        //getting reference
+//        dbPrice = FirebaseDatabase.getInstance().getReference("Transactions").child("Purchases");
+//
+//        //getting name from database
+//        dbPrice.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String value = dataSnapshot.getValue(String.class);
+//                try {
+//                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
+//                } catch ( InvalidKeyException
+//                        | IllegalBlockSizeException
+//                        | BadPaddingException e) {
+//                    e.printStackTrace();
+//                }
+//                mCurrency.setText(value);
+//                Log.d(TAG, "onDataChange: " + value);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
+//    }
 }

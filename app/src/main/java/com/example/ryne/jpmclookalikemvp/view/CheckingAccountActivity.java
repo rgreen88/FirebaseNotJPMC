@@ -53,7 +53,7 @@ public class CheckingAccountActivity extends BaseActivity {
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
 
     private String time;
-    private String name;
+    private String name = "";
 
     //creating CheckingAccountAdapter variable called mAdapter
     CheckingAccountAdapter mAdapter;
@@ -132,7 +132,7 @@ public class CheckingAccountActivity extends BaseActivity {
 
     }
 
-    //TODO: implementing thread in parts starting with a structure
+    //TODO: implementing thread in parts starting with a structure in other activities
     class RunnableDemo implements Runnable {
         private Thread t;
         private String threadName;

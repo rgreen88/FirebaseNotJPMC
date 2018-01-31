@@ -48,6 +48,8 @@ public class CheckingAccountActivity extends BaseActivity {
     public KeyStoreHandler keyStoreHandler;
     public KeyPair masterKey;
 
+
+    RunnableDemo demoThread;
     //TextViews
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
 
@@ -98,15 +100,10 @@ public class CheckingAccountActivity extends BaseActivity {
         } catch (UnrecoverableKeyException e) {
             e.printStackTrace();
         }
-        try {
-            getCustomerGreeting();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        }
+
+        //starting thread for data retrieval and decryption
+        demoThread.start();
+        demoThread.start();
 
         //RecyclerView LinearLayoutManager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -137,7 +134,7 @@ public class CheckingAccountActivity extends BaseActivity {
     }
 
     //TODO: implementing thread in parts starting with a structure
-    static class RunnableDemo implements Runnable {
+    class RunnableDemo implements Runnable {
         private Thread t;
         private String threadName;
 
@@ -147,21 +144,41 @@ public class CheckingAccountActivity extends BaseActivity {
         }
 
         public void run() {
-            System.out.println("Running " +  threadName );
-            try {
-                for(int i = 4; i > 0; i--) {
-                    System.out.println("Thread: " + threadName + ", " + i);
-                    // Let the thread sleep for a while.
-                    Thread.sleep(50);
+            // Referencing database path...may need to space out reference objects
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            //TODO: Cipher decrypt from database
+            jpmcRef = database.getReference("Customer").child("Name");
+            jpmcRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    //TODO: Decrypt
+                    String value = dataSnapshot.getValue(String.class);
+                    try {
+                        value = cipherHandler.decrypt(value, masterKey.getPrivate());
+                    } catch (InvalidKeyException
+                            | IllegalBlockSizeException
+                            | BadPaddingException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d(TAG, "Value is: " + value);
+                    mGreeting.setText(value);
+
                 }
-            } catch (InterruptedException e) {
-                System.out.println("Thread " +  threadName + " interrupted.");
-            }
-            System.out.println("Thread " +  threadName + " exiting.");
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.d(TAG, "Cancelled");
+                }
+
+            });
+
         }
 
         public void start () {
-            System.out.println("Starting " +  threadName );
+
+            //start the database data retrieval
             if (t == null) {
                 t = new Thread (this, threadName);
                 t.start ();
@@ -169,9 +186,10 @@ public class CheckingAccountActivity extends BaseActivity {
         }
     }
 
-    public static class TestThread {
+    //does this need to be static?
+    public class TestThread {
 
-        public static void main(String args[]) {
+        public void main(String args[]) {
             RunnableDemo R1 = new RunnableDemo( "Thread-1");
             R1.start();
 
@@ -181,39 +199,39 @@ public class CheckingAccountActivity extends BaseActivity {
     }
 
 
-    //TODO: create threading for datasnap
-    public void getCustomerGreeting() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
-        // Referencing database path...may need to space out reference objects
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //TODO: Cipher decrypt from database
-        jpmcRef = database.getReference("Customer").child("Name");
-        jpmcRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                //TODO: Decrypt
-                String value = dataSnapshot.getValue(String.class);
-                try {
-                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
-                } catch (InvalidKeyException
-                        | IllegalBlockSizeException
-                        | BadPaddingException e) {
-                    e.printStackTrace();
-                }
-                Log.d(TAG, "Value is: " + value);
-                mGreeting.setText(value);
+//    //TODO: create threading for datasnap
+//    public void getCustomerGreeting() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
+//        // Referencing database path...may need to space out reference objects
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        //TODO: Cipher decrypt from database
+//        jpmcRef = database.getReference("Customer").child("Name");
+//        jpmcRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                //TODO: Decrypt
+//                String value = dataSnapshot.getValue(String.class);
+//                try {
+//                    value = cipherHandler.decrypt(value, masterKey.getPrivate());
+//                } catch (InvalidKeyException
+//                        | IllegalBlockSizeException
+//                        | BadPaddingException e) {
+//                    e.printStackTrace();
+//                }
+//                Log.d(TAG, "Value is: " + value);
+//                mGreeting.setText(value);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Log.d(TAG, "Cancelled");
+//            }
+//
+//        });
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d(TAG, "Cancelled");
-            }
-
-        });
-
-    }
+//    }
     @VisibleForTesting
     public ProgressDialog mProgressDialog;
 

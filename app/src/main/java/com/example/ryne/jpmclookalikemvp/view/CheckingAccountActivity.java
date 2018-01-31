@@ -140,7 +140,7 @@ public class CheckingAccountActivity extends BaseActivity {
 
         RunnableDemo( String name) {
             threadName = name;
-            System.out.println("Creating " +  threadName );
+        //    System.out.println("Creating " +  threadName );
         }
 
         public void run() {

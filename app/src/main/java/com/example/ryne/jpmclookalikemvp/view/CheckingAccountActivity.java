@@ -49,11 +49,11 @@ public class CheckingAccountActivity extends BaseActivity {
     public KeyPair masterKey;
 
 
-    RunnableDemo demoThread;
     //TextViews
     TextView mGreeting, mCheckingAccount, mCurrentDate, mCurrency, mPayBills;
 
     private String time;
+    private String name;
 
     //creating CheckingAccountAdapter variable called mAdapter
     CheckingAccountAdapter mAdapter;
@@ -101,9 +101,8 @@ public class CheckingAccountActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        //starting thread for data retrieval and decryption
-        demoThread.start();
-        demoThread.start();
+        Thread checkingThread = new Thread(new RunnableDemo(name));
+        checkingThread.start();  //should be start();
 
         //RecyclerView LinearLayoutManager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
